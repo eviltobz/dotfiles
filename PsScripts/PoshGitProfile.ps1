@@ -14,6 +14,7 @@ function prompt {
     Write-VcsStatus
 
     $LASTEXITCODE = $realLASTEXITCODE
+    Write-Host ""
     return "> "
 }
 
