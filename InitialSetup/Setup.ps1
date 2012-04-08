@@ -21,16 +21,33 @@ function RedirectVimrc()
 
 function RedirectProfile()
 {
-  if(Test-Path $PROFILE)
+  $OldProfile = "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+  if($OldProfile -ne $PROFILE)
   {
-    echo "Backing up old powershell profile"
-    mv $PROFILE .\OldProfile.ps1
+    echo "Not redirecting profile. Current profile: $PROFILE" 
+    echo "Expected: $OldProfile"
   }
-  $newProfile = ". $currentDir\..\PsScripts\profile.ps1"
-  echo "Setting profile contents to $newProfile"
-  echo $newProfile > $PROFILE
+  else
+  {
+    if(Test-Path $OldProfile)
+    {
+      echo "Backing up old powershell profile"
+      mv $OldProfile .\OldProfile.ps1
+    }
+    $newProfile = ". $currentDir\..\PsScripts\profile.ps1"
+    echo "new profile path: $newProfile"
+    echo "Setting profile contents to $newProfile"
+    echo $newProfile > $PROFILE
+  }
 }
+
+function InstallPsGet()
+{
+  (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | Invoke-Expression
+}
+
+InstallPsGet
+Install-Module posh-git
 
 RedirectVimrc
 RedirectProfile
-
