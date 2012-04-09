@@ -1,3 +1,35 @@
 imap jj <Esc>
 
 syntax on
+
+" Taken hints from vi-improved.org/vimrc.html and vim.wikia.com/wiki/example_vimrc
+
+" UI
+set nocompatible
+set cursorcolumn
+set cursorline
+set ruler
+set scrolloff=10
+set laststatus=2
+set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+set noerrorbells visualbell
+set hlsearch
+set wildmenu
+set showcmd
+set mouse=a
+set confirm
+"set cmdheight=2
+
+" Searching
+set ignorecase
+set smartcase
+
+" Formatting & Layout
+set expandtab
+set softtabstop=2
+set shiftwidth=2
+set autoindent
+
+" Mappings
+map Y y$
+nnoremap <C-L> :nohl<CR><C-L>
