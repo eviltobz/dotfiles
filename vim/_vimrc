@@ -29,6 +29,7 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 set autoindent
+set backspace=indent,eol,start
 
 " Mappings
 map Y y$
