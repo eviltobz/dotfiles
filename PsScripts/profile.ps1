@@ -29,7 +29,9 @@ function EditVimrc()
   vim "$SCRIPTS\..\vim\_vimrc"
 }
 
+$MODULEHOME = $env:PSModulePath.Split(";")[0]
 Import-Module PsGet
+Import-Module Powertab
 
 $SCRIPTS = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $env:path += ";$SCRIPTS"

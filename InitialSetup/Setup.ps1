@@ -46,8 +46,11 @@ function InstallPsGet()
   (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | Invoke-Expression
 }
 
+$MODULEHOME = $env:PSModulePath.Split(";")[0]
+
 InstallPsGet
 Install-Module posh-git
+cp Powertab $MODULEHOME
 
 RedirectVimrc
 RedirectProfile
