@@ -1,4 +1,6 @@
+imap jk <ESC>
 imap jj <Esc>
+imap kk <ESC>
 
 syntax on
 
@@ -29,7 +31,9 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 set autoindent
+" Editing Tweaks
 set backspace=indent,eol,start
+set cpoptions+=$ "mark where a change will effet to
 
 " Mappings
 map Y y$
