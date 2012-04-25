@@ -50,7 +50,7 @@ $MODULEHOME = $env:PSModulePath.Split(";")[0]
 
 InstallPsGet
 Install-Module posh-git
-cp Powertab $MODULEHOME
+cp Powertab $MODULEHOME -force -recurse
 
 RedirectVimrc
 RedirectProfile
