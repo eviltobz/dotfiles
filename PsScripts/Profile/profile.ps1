@@ -24,8 +24,11 @@ function EditProfile() { vim $FULLPROFILE }
 function EditVimrc() { vim "$SCRIPTS\..\vim\_vimrc" }
 function ls-a() {ls -Force} # add a param for specifiying a path sometime...
 
+$MODULEHOME = $env:PSModulePath.Split(";")[0]
+
 #nuget like tool for PS
 Import-Module PsGet
+Import-Module Powertab
 
 #Tweak and add environment variables and similar
 $SCRIPTS = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
