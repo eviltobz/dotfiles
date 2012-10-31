@@ -19,25 +19,23 @@ function VsVars32($version = "10.0")
     #add a call to set-consoleicon as seen below...hm...!
 }
 
-function EditProfile()
-{
-  vim $PROFILE
-}
-
-function EditVimrc()
-{
-  vim "$SCRIPTS\..\vim\_vimrc"
-}
+#Set up some handy utility functions
+function EditProfile() { vim $FULLPROFILE }
+function EditVimrc() { vim "$SCRIPTS\..\vim\_vimrc" }
+function ls-a() {ls -Force} # add a param for specifiying a path sometime...
 
 $MODULEHOME = $env:PSModulePath.Split(";")[0]
+
+#nuget like tool for PS
 Import-Module PsGet
 #Import-Module Powertab
 Import-Module "PowerTab" -ArgumentList "C:\Users\tobz\Documents\WindowsPowerShell\PowerTabConfig.xml"
 
+#Tweak and add environment variables and similar
 $SCRIPTS = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $env:path += ";$SCRIPTS"
 
-$PROFILE = "$SCRIPTS\profile.ps1"
+$FULLPROFILE = "$SCRIPTS\profile.ps1"
 . "$SCRIPTS\PoshGitProfile.ps1"
 
 VsVars32
