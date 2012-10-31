@@ -31,7 +31,8 @@ function EditVimrc()
 
 $MODULEHOME = $env:PSModulePath.Split(";")[0]
 Import-Module PsGet
-Import-Module Powertab
+#Import-Module Powertab
+Import-Module "PowerTab" -ArgumentList "C:\Users\tobz\Documents\WindowsPowerShell\PowerTabConfig.xml"
 
 $SCRIPTS = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $env:path += ";$SCRIPTS"
