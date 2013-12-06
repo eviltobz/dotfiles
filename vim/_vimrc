@@ -1,40 +1,82 @@
-imap jk <ESC>
-imap jj <Esc>
-imap kk <ESC>
-
-syntax on
+" configuring powershell for the vim shell
+  " this could do with being pulled out to a different file and sourced for better source control across platforms
+set shell=powershell
+set shellcmdflag=-command
 
 " Taken hints from vi-improved.org/vimrc.html and vim.wikia.com/wiki/example_vimrc
 
-" UI
-set nocompatible
-set cursorcolumn
-set cursorline
-set ruler
-set scrolloff=10
+" Quckly tap jk to go to normal mode :)
+"inoremap jk <ESC>
+"vnoremap jk <ESC>
+" falls through to ESC mapping for added :nohlsearch in normal mode
+"nmap jk <ESC> 
+set timeoutlen=100 " nice and quick bailing on mappings
+  " may need to separately set ttimeout stuff at some point...
+
+" turbo cursor navigation
+nnoremap <silent> <Left> @='5h'<CR>|xnoremap <silent> <Left> @='5h'<CR> "|onoremap <Left> 5h|
+nnoremap <silent> <Up> @='5k'<CR>|xnoremap <silent> <Up> @='5k'<CR> "|onoremap <Up> 5k|
+nnoremap <silent> <Down> @='5j'<CR>|xnoremap <silent> <Down> @='5j'<CR> "|onoremap <Down> 5j|
+nnoremap <silent> <Right> @='5l'<CR>|xnoremap <silent> <Right> @='5l'<CR> "|onoremap <Right> 5l|
+
+" mappings
+" Y yanks to end of line, change to nnoremap???
+map Y y$ 
+" map escape to clear highlight 
+nnoremap <ESC> :nohlsearch<CR><ESC> 
+
+" General UI Settings
+syntax on
+filetype on
+" au(tomatically) apply syntax to filetypes when loaded
+au BufNewFile,BufRead *.config set filetype=xml
+
+set nocompatible " vim not vi
+set scrolloff=5 " scroll before hitting the edge
+set display=lastline " show what can be seen of long, wrapping-lines as you scroll, rather than waiting til it all fits the screen (which it may never do)
+set display+=uhex " and show unicode values for undisplayable chars rather than odd control char thingies
+"highlight cursorline ctermbg=1 "dark blue background for readability
+  " good statusbar info
+set ruler 
 set laststatus=2
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-set noerrorbells visualbell
-set hlsearch
+set noerrorbells visualbell " stop beeping all the time
+" show line numbers for wapping cursor to a line with :<line number> or <line number>G
+set number
+" gvim stuff
+if has("gui_running") " Some stuff suitable for gvim might be less good for the terminal
+  set lines=45 columns=160
+  set guifont=Consolas:h9:cANSI
+  " crosshairs - Cool but messy in commandline mode
+  set cursorcolumn 
+  set cursorline
+  " different options for macvim? different conditional check???
+endif
+" other recommended stuff...
 set wildmenu
 set showcmd
 set mouse=a
 set confirm
 "set cmdheight=2
 
-" Searching
-set ignorecase
-set smartcase
-
-" Formatting & Layout
+" formatting & layout
 set expandtab
 set softtabstop=2
 set shiftwidth=2
 set autoindent
-" Editing Tweaks
 set backspace=indent,eol,start
-set cpoptions+=$ "mark where a change will effet to
 
-" Mappings
-map Y y$
-nnoremap <C-L> :nohl<CR><C-L>
+" tab & shift tab for indenting highlighted line & keeping highlight active
+vmap <TAB> >gv
+vmap <S-TAB> <gv
+
+" search options & highlighting
+  " goodness with case
+set ignorecase
+set smartcase
+  " highlight all matches & do incremental search to first instance
+set hlsearch
+set incsearch
+" keep backup/restore/swap type files out of the way, rather than in the same folder
+set backupdir=~/vimfiles/backups
+set directory=~/vimfiles/backups
