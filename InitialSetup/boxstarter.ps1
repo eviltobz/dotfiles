@@ -33,7 +33,7 @@ Install-WindowsUpdate -AcceptEula
 if (Test-PendingReboot) { Invoke-Reboot }
 # end gubbins...
 
-cinst cmder -pre
+cinst cmder #-pre
 # copy cmder configs around somewhere???
 
 cinst vim
