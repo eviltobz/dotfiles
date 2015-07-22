@@ -9,7 +9,7 @@ $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a r
 
 # Basic setup
 Update-ExecutionPolicy Unrestricted
-Set-WindowsExplorerOptions -EnableShowHidenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions -EnableShowFullPathInTitleBar
+Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions -EnableShowFullPathInTitleBar
  write-host "-navigation pane show all folders & auto expand... any pure powershell hacks?"
 #try this:
 $key = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
