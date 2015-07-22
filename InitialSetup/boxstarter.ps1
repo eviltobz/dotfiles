@@ -48,22 +48,22 @@ if (Test-PendingReboot) { Invoke-Reboot }
 
 # created in C:\tools\cmder
 # -pre needs VC++ 2015 redist installed which isn't chocolatey... yet. should be soon though
-cinstm cmder #-pre
+cinst cmder #-pre
 # copy cmder configs around somewhere???
 PinToTaskbar "C:\tools\cmder\" "cmder.exe"
 
-cinstm vim
+cinst vim -y
 # copy vimrc files etc into place
 # set up plugins & whatnots
 
 
-cinstm notepadplusplus # or should it be notepadplusplus.install ???
+cinst notepadplusplus -y # or should it be notepadplusplus.install ???
 
 
 # git - poshgit - kdiff3 - github? gitextensions
 # git-credential-winstore ???
 
-cinstm 7zip.install
+cinst 7zip.install -y 
 
 #autohotkey? sysinternals?
 
@@ -83,7 +83,7 @@ cinstm 7zip.install
 # dropbox et al.
 # evernote, spotify
 
-#cinstm cygwin ????
+#cinst cygwin ????
 
 # visual studio?
 # visual studio plugins - vsvim aint listed, but some things like this - https://chocolatey.org/packages/alanstevens.vsextensions - install it, so have a look at what that does :)
