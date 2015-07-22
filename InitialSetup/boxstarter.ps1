@@ -1,6 +1,19 @@
 # Lets get the key base set of tweaks & installs that i'd likely want on any box in my control - main dev box, LOC vm etc.
 # then a secondary script for the main box type of tools
 
+# can we find a suitabubble location and download additional files there - support functions, config files for apps etc.
+write-host "DEBUGGY STUFF"
+write-host "current working folder is:"
+pwd
+write-host "END DEBUGGY STUFF"
+
+function PinToTaskbar($folder, $file)
+{
+  $sa = new-object -c shell.application
+  $pn = $sa.namespace($folder).parsename($file)
+  $pn.invokeverb('taskbarpin')
+}
+
 
 # Boxstarter options
 $Boxstarter.RebootOk=$true # Allow reboots?
@@ -33,8 +46,11 @@ Install-WindowsUpdate -AcceptEula
 if (Test-PendingReboot) { Invoke-Reboot }
 # end gubbins...
 
+# created in C:\tools\cmder
+# -pre needs VC++ 2015 redist installed which isn't chocolatey... yet. should be soon though
 cinst cmder #-pre
 # copy cmder configs around somewhere???
+PinToTaskbar "C:\tools\cmder\" "cmder.exe"
 
 cinst vim
 # copy vimrc files etc into place
