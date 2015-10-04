@@ -10,14 +10,27 @@ set shellcmdflag=-command
 "vnoremap jk <ESC>
 " falls through to ESC mapping for added :nohlsearch in normal mode
 "nmap jk <ESC> 
-set timeoutlen=100 " nice and quick bailing on mappings
+"set timeoutlen=100 " nice and quick bailing on mappings
   " may need to separately set ttimeout stuff at some point...
+  " timeoutlen effects <Leader> grammar
 
+
+
+
+" Navigation stuff
 " turbo cursor navigation
 nnoremap <silent> <Left> @='5h'<CR>|xnoremap <silent> <Left> @='5h'<CR> "|onoremap <Left> 5h|
 nnoremap <silent> <Up> @='5k'<CR>|xnoremap <silent> <Up> @='5k'<CR> "|onoremap <Up> 5k|
 nnoremap <silent> <Down> @='5j'<CR>|xnoremap <silent> <Down> @='5j'<CR> "|onoremap <Down> 5j|
 nnoremap <silent> <Right> @='5l'<CR>|xnoremap <silent> <Right> @='5l'<CR> "|onoremap <Right> 5l|
+
+" Word-wrapped lines navigable with j & k
+nmap j gj
+nmap k gk
+
+
+
+
 
 " mappings
 " Y yanks to end of line, change to nnoremap???
@@ -28,6 +41,9 @@ nnoremap <ESC> :nohlsearch<CR><ESC>
 " General UI Settings
 syntax on
 filetype on
+filetype plugin on
+filetype indent on
+
 " au(tomatically) apply syntax to filetypes when loaded
 au BufNewFile,BufRead *.config set filetype=xml
 
@@ -80,3 +96,65 @@ set incsearch
 " keep backup/restore/swap type files out of the way, rather than in the same folder
 set backupdir=~/vimfiles/backups
 set directory=~/vimfiles/backups
+" set backupdir=~/.vim/backups
+" set directory=~/.vim/backups
+
+" File type specific tweaks - may want to pull out to individual files in
+" ftplugin dir
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+
+" Set up any plugin bits n bobbins
+execute pathogen#infect()
+
+
+
+" command line movement keys
+"cnoremap <C-a>  <Home>
+"cnoremap <C-b>  <Left>
+"cnoremap <C-f>  <Right>
+"cnoremap <C-d>  <Delete>
+"cnoremap <M-b>  <S-Left>
+"cnoremap <M-f>  <S-Right>
+"cnoremap <M-d>  <S-right><Delete>
+"cnoremap <Esc>b <S-Left>
+"cnoremap <Esc>f <S-Right>
+"cnoremap <Esc>d <S-right><Delete>
+"cnoremap <C-g>  <C-c>
+
+
+
+" NOTE - Sometimes having a comment on the end make the command not work (:buffers for example)
+" NOTE 2 - mebe write a plugin to list leader grammar by groups & drill in - 
+"         - not quite spacemacs where it does it, but at least have the discoverability
+
+" Leader grammar
+let mapleader = ' '
+" b - Buffer
+  " buffer mini menu - list buffers, and prompt for number to select
+nnoremap <Leader>bb :buffers<CR>:buffer<Space>
+nmap <Leader>b1 :buffer 1<CR> " switch to buffer
+nmap <Leader>b2 :buffer 2<CR> " switch to buffer
+nmap <Leader>b3 :buffer 3<CR> " switch to buffer
+nmap <Leader>b4 :buffer 4<CR> " switch to buffer
+nmap <Leader>b5 :buffer 5<CR> " switch to buffer
+
+" f - Files
+nnoremap <Leader>ft :NERDTreeToggle<CR> " t - Tree
+"nnoremap <Leader>f. :e ~/.vimrc<CR>     " . - edit .vimrc
+nnoremap <Leader>f. :e $MYVIMRC<CR>     " . - edit .vimrc
+nnoremap <Leader>fr :so $MYVIMRC<CR>     " source - re-source .vimrc
+
+" s - Selection
+nnoremap <Leader>sa ggVG " Select All
+" copy & paste to system clipboard
+vmap <Leader>sy "+y
+vmap <Leader>sd "+d
+nmap <Leader>sp "+p
+nmap <Leader>sP "+P
+vmap <Leader>sp "+p
+vmap <Leader>sP "+P
+
+" t - Toggles
+nmap <Leader>tp :set paste!<CR> " p - Paste mode - stops indents & stuff... allegedly...
+
+
