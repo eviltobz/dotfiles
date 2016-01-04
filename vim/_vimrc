@@ -143,6 +143,15 @@ nnoremap <Leader>ft :NERDTreeToggle<CR> " t - Tree
 "nnoremap <Leader>f. :e ~/.vimrc<CR>     " . - edit .vimrc
 nnoremap <Leader>f. :e $MYVIMRC<CR>     " . - edit .vimrc
 nnoremap <Leader>fr :so $MYVIMRC<CR>     " source - re-source .vimrc
+" - let's try to get some common file-format furtling stuff 
+" - http://stackoverflow.com/questions/3853028/how-to-force-vim-to-syntax-highlight-a-file-as-html
+" - for things like editing html templates in the deploying SQL file. 
+" mebe have some common type setting binds, and a general one that needs an arg
+" look into differences between filetype & syntax - syntax may be more appropriate when hacking html in an sql
+" "Note that :set syntax=xml highlights properly but seems to fail when one is attempting to autoindent the file 
+" "(i.e. running gg=G). When I switched to :set filetype=xml, the highlighting worked properly and the file indented properly.
+
+
 
 " s - Selection
 nnoremap <Leader>sa ggVG " Select All
