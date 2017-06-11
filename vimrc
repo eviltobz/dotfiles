@@ -118,8 +118,8 @@ set smartcase
 set hlsearch
 set incsearch
 " keep backup/restore/swap type files out of the way, rather than in the same folder
-set backupdir=~/.vim/backups
-set directory=~/.vim/backups
+set backupdir=~/dotfiles/vim/backups
+set directory=~/dotfiles/vim/backups
 
 " File type specific tweaks - may want to pull out to individual files in
 " ftplugin dir
