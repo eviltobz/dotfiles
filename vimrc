@@ -58,6 +58,8 @@ nmap k gk
 " mappings
 " Y yanks to end of line, change to nnoremap???
 map Y y$ 
+" Save with sudo
+cmap w!! %!sudo tee > /dev/null %
 " map escape to clear highlight -- changing to double space due to terminal foobar with escape codes
 " nnoremap <ESC> :nohlsearch<CR><ESC> 
 
@@ -126,7 +128,7 @@ set directory=~/dotfiles/vim/backups
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 
 " Set up any plugin bits n bobbins
-"execute pathogen#infect()
+execute pathogen#infect()
 
 
 
@@ -150,8 +152,9 @@ autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 "         - not quite spacemacs where it does it, but at least have the discoverability
 
 " Leader grammar
-let mapleader = ' '
-nmap <Silent> <Leader><Leader> :nohlsearch<CR>
+let mapleader = " "
+nmap <Leader><Leader> :nohlsearch<CR>
+
 " b - Buffer
   " buffer mini menu - list buffers, and prompt for number to select
 nnoremap <Leader>bb :buffers<CR>:buffer<Space>
