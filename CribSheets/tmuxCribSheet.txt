@@ -1,0 +1,33 @@
+PF d - detach from session
+PF : - enter command mode
+
+PF c - create new window
+PF , - rename window
+PF & - close window
+PF 0..9 - select window by number
+PF w - selectable list of windows
+PF f - search for window with text
+
+PF | or / - split window - in original or current dir
+PF - or _ - split window - in original or current dir
+PF x - close pane
+PF o - cycle though panes
+PF q - display pane numbers
+PF space - cycle through pane layouts
+
+PF ( or ) - cycle between sessions
+PF s - list and select from current session
+     - SPC to expand a session & select a window
+
+PF ESC - start copy mode - Ctrl-c to exit without copy
+- vim navigation hjkl, ctrl-b/f, g/G f/F, /? etc.
+- SPC - start character selection
+- V - start line selection
+- v - toggle block or line selection mode
+- y (or Enter) - yank and exit copy
+PF p - paste
+PF = - list paste buffer - select one to paste or q to exit
+PF Ctrl-v - paste system clipboard
+
+PF z - zoom a pane to full window & back
+
