@@ -5,13 +5,31 @@
 
 # make the script appropriately idempotent
 
-function link ($file, $dest) {
+function linkFile ($file, $dest) {
   write-host "Linking $file to $dest"
   cmd /c mklink /h $dest $file
 }
 
+function linkFolder ($file, $dest) {
+  write-host "Linking $file to $dest"
+  cmd /c mklink /j $dest $file
+}
 
-link vimrc %USERPROFILE%\_vimrc
-link vsvimrc %USERPROFILE%\_vsvimrc
+function gitGet ($name, $dest, $source) {
+  Write-Host "Pulling $name from $source into $dest"
+  git clone $source $dest
+}
 
-link spacemacs %USERPROFILE%\.spacemacs
+linkFile vimrc %USERPROFILE%\_vimrc
+linkFile vsvimrc %USERPROFILE%\_vsvimrc
+
+linkFolder vim %USERPROFILE%\vimfiles
+mkdir ~\vimfiles\backups
+
+mkdir ~\vimfiles\autoload
+curl https://tpo.pe/pathogen.vim -outfile ./vim/autoload/pathogen.vim
+
+gitGet NERDtree vim/bundle/nerdtree https://github.com/scrooloose/nerdtree.git
+
+
+
