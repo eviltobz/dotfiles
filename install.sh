@@ -80,7 +80,13 @@ createFolder vim/backups
 createFolder vim/autoload 
 createFolder vim/bundle 
 curlGet Pathogen vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+# Vim plugins
+# File browser
 gitGet NERDtree vim/bundle/nerdtree https://github.com/scrooloose/nerdtree.git
+# Generic syntax checking
+gitGet syntastic vim/bundle/syntastic https://github.com/vim-syntastic/syntastic.git
+# Idris extensions
+gitGet idris-vim vim/bundle/idris-vim https://github.com/idris-hackers/idris-vim.git
 
 gitGet oh-my-zsh nix/oh-my-zsh git://github.com/robbyrussell/oh-my-zsh.git
 
@@ -89,6 +95,9 @@ gitGet tpm  nix/tmux/tmux/plugins/tpm https://github.com/tmux-plugins/tpm
 # Manual install steps
 # vim
 #  :helptags ~/.vim/bundle/nerdtree/doc/
+#  :helptags ~/.vim/bundle/syntastic/doc
+#  :helptags ~/.vim/bundle/idris-vim/doc
+#  ??? pathogen#helptags() added to .vimrc should cover this
 
 # tmux
 #  Prefix I -- tpm install plugins

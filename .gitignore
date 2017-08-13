@@ -7,3 +7,5 @@ vim/autoload/pathogen.vim
 nix/oh-my-zsh
 vim/bundle/nerdtree
 nix/tmux/tmux/plugins
+vim/bundle/idris-vim
+vim/bundle/syntastic
