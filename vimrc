@@ -23,6 +23,11 @@ elseif has("win32")
   set shellredir=>
 endif
 
+" Added some styling which may make it better in windows...
+set cursorcolumn
+set cursorline
+hi CursorColumn term=bold cterm=bold ctermbg=238
+hi CursorLine term=bold,underline cterm=bold,underline
 
 " Taken hints from vi-improved.org/vimrc.html and vim.wikia.com/wiki/example_vimrc
 
@@ -121,6 +126,8 @@ set incsearch
 " keep backup/restore/swap type files out of the way, rather than in the same folder
 set backupdir=~/dotfiles/vim/backups
 set directory=~/dotfiles/vim/backups
+set undodir=~/dotfiles/vim/backups
+set undofile
 
 " File type specific tweaks - may want to pull out to individual files in
 " ftplugin dir
