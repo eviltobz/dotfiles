@@ -19,6 +19,18 @@ function gitignore {
   fi
 }
 
+function binlink {
+  SOURCE=/bin/$1
+  DEST=/usr/local/bin/$1
+  if [ -e $DEST ]; then
+    echo -e "${YELLOW}$1 exists in /usr/local/bin. Not linking."
+  else
+    echo -e "${GREEN}Linking $1 to /usr/local/bin from $SOURCE"
+    ln -s $SOURCE $DEST
+  fi
+}
+
+
 function link {
   SOURCE=~/dotfiles/$1/$2
   DEST=~/.$2
@@ -69,6 +81,8 @@ function gitGet {
   fi
 }
 
+binlink zsh
+
 link . vimrc
 link . vim
 link nix/zsh zshrc
@@ -91,6 +105,8 @@ gitGet idris-vim vim/bundle/idris-vim https://github.com/idris-hackers/idris-vim
 gitGet oh-my-zsh nix/oh-my-zsh git://github.com/robbyrussell/oh-my-zsh.git
 
 gitGet tpm  nix/tmux/tmux/plugins/tpm https://github.com/tmux-plugins/tpm 
+
+link nix oh-my-zsh
 
 # Manual install steps
 # vim
