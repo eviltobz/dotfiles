@@ -33,3 +33,17 @@ gitGet NERDtree vim/bundle/nerdtree https://github.com/scrooloose/nerdtree.git
 
 
 
+
+
+# Windows Specific Things
+
+write-host "if this fails, run Set-ExecutionPolicy Bypass"
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+choco install vim
+#choco install consolez
+choco install conemu
+choco install poshgit
+choco install tailblazer
+#choco install cygwin  ??? may still be useful in the linux subsystem world to allow nix shell to run windows executables etc.
+

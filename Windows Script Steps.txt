@@ -1,0 +1,14 @@
+FIRSTLY UP!!!
+Can I pull out a common set of steps, and have both windows & nix scripts run it? currently we'll be doing a lot of repetition.
+Yeah, some things may be specific to one or t'other, but the bulk of things wants to be the same.
+
+
+Manual steps performed:
+
+01. Run linkify to set up vimrc & vsvimrc
+02. mkdir dotfiles/vim/autoload
+03. curl https://tpo.pe/pathogen.vim -outfile ./vim/autoload/pathogen.vim
+
+
+
+
