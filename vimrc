@@ -211,7 +211,8 @@ nnoremap <Leader>fr :so $MYVIMRC<CR>     " source - re-source .vimrc
 
 
 " s - Selection
-nnoremap <Leader>sa ggVG " Select All
+" Select All
+nnoremap <Leader>sa ggVG 
 " copy & paste to system clipboard -- NOTE using + instead of * was this a linux thing? do i need to do more OS checks?
 vmap <Leader>sy "+y
 vmap <Leader>sd "+d
