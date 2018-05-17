@@ -9,3 +9,4 @@ vim/bundle/nerdtree
 nix/tmux/tmux/plugins
 vim/bundle/idris-vim
 vim/bundle/syntastic
+nix/tmux/tmux/plugins/tpm
