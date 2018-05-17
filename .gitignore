@@ -10,3 +10,4 @@ nix/tmux/tmux/plugins
 vim/bundle/idris-vim
 vim/bundle/syntastic
 nix/tmux/tmux/plugins/tpm
+Windows/WindowsPowerShell/Modules/posh-git
