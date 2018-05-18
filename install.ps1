@@ -26,8 +26,13 @@ function ensureFolder ($path) {
 }
 
 function gitGet ($name, $dest, $source) {
-  Write-Host "Pulling $name from $source into $dest"
-  git clone $source $dest
+  if(-not (Test-Path $path)) {
+    Write-Host "Pulling $name from $source into $dest"
+    git clone $source $dest
+  } else {
+    Write-Host "Already have the git repo $name pulled." -f red
+    Write-Host "Maybe we should do a pull here, keep it up to date..." -f red
+  }
 }
 
 function PinToTaskbar($folder, $file)
