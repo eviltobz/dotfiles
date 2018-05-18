@@ -83,7 +83,7 @@ function DoSetup() {
   chocoInstall poshgit
   chocoToTaskbar tailblazer "C:\ProgramData\chocolatey\lib\tailblazer\tools" "TailBlazer.exe"
 
-  $env:path += ";c:\Program Files\Git\cmd"
+  linkFile Windows\ConEmu.xml $env:AppData\ConEmu.xml
 
 # Common settings
   linkFile vimrc $env:userprofile\_vimrc
