@@ -16,10 +16,10 @@ function rm() {
 function ls() {
   if($args[0] -eq "-lah") {
     write-host "unixey override ls -lah $args[1]"
-    Get-ChildItem -force $args[1]
+    Get-ChildItem -force "$args[1]"
   } else {
     write-host "unixey override passthrough to Get-ChildItem $args"
-    iex "Get-ChildItem $args"
+    iex "Get-ChildItem '$args'"
   }
 }
 
