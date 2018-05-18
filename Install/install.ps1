@@ -45,7 +45,7 @@ function PinToTaskbar($folder, $file)
 
 $chocInstallCode = 0
 function chocoInstall($name) {
-  if((choco list -l | findstr -i "^$name ").Count > 0) {
+  if((choco list -l | findstr -i "^$name ").Count -gt 0) {
     Write-Host "Choco has already installed $name"
     choco list -l | findstr -i "^$name "
     $chocInstallCode = 1
