@@ -1,4 +1,5 @@
 
+
 function ensureFolder ($path) {
   if(-not (Test-Path $path)) {
     mkdir $path
@@ -28,8 +29,8 @@ function DoPrereqs() {
   chocoInstall git
   $env:path += ";c:\Program Files\Git\cmd"
 
-  ensureFolder $args[0]
-  gitGet DotFiles $args[0] https://github.com/eviltobz/dotfiles.git 
+  ensureFolder $path
+  gitGet DotFiles $path https://github.com/eviltobz/dotfiles.git 
 }
 
 if ((get-executionpolicy) -ne "Bypass") {
