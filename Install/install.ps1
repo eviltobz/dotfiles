@@ -26,7 +26,7 @@ function ensureFolder ($path) {
 }
 
 function gitGet ($name, $dest, $source) {
-  if(-not (Test-Path $path)) {
+  if(-not (Test-Path $dest)) {
     Write-Host "Pulling $name from $source into $dest"
     git clone $source $dest
   } else {
