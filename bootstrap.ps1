@@ -41,6 +41,8 @@ if ((get-executionpolicy) -ne "Bypass") {
 
 if ((get-executionpolicy) -eq "Bypass") {
   DoPrereqs
+  cd $path
+  & .\install.ps1
 } else {
   Write-Host "Could not alter execution policy. The current policy is: $(Get-ExecutionPolicy)" -f red
   Write-Host "Please run the following command:" -f red
