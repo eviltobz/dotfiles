@@ -83,7 +83,7 @@ function gitGet {
 
 binlink zsh
 
-link . vimrc
+link vim vimrc
 link . vim
 link nix/zsh zshrc
 link nix/tmux tmux.conf

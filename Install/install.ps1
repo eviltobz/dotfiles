@@ -93,8 +93,8 @@ function DoSetup() {
 # Common settings
   linkFolder . $env:userprofile\dotfiles
 
-  linkFile vimrc $env:userprofile\_vimrc
-  linkFile vsvimrc $env:userprofile\_vsvimrc
+  linkFile .\vim\vimrc $env:userprofile\_vimrc
+  linkFile .\vim\vsvimrc $env:userprofile\_vsvimrc
   ensureFolder .\vim\backups
   ensureFolder .\vim\bundle
   ensureFolder .\vim\autoload
