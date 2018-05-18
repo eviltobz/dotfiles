@@ -91,16 +91,16 @@ function DoSetup() {
   linkFile Windows\ConEmu.xml $env:AppData\ConEmu.xml
 
 # Common settings
+  linkFolder . $env:userprofile\dotfiles
+
   linkFile vimrc $env:userprofile\_vimrc
   linkFile vsvimrc $env:userprofile\_vsvimrc
+  ensureFolder .\vim\backups
+  ensureFolder .\vim\bundle
+  ensureFolder .\vim\autoload
 
-  linkFolder . $env:userprofile\dotfiles
-  ensureFolder ~\dotfiles\vim\backups
-
-  ensureFolder ~\dotfiles\vim\autoload
   Invoke-WebRequest https://tpo.pe/pathogen.vim -outfile ./vim/autoload/pathogen.vim
-
-  gitGet NERDtree vim/bundle/nerdtree https://github.com/scrooloose/nerdtree.git
+  gitGet NERDtree ./vim/bundle/nerdtree https://github.com/scrooloose/nerdtree.git
 
   git config --global core.editor vim
 }
