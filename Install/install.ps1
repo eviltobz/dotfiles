@@ -86,6 +86,7 @@ function DoSetup() {
   chocoToTaskbar vim "C:\Program Files (x86)\vim\vim80" "gvim.exe"
   chocoToTaskbar conemu "C:\Program Files\ConEmu" "ConEmu64.exe"
   chocoInstall poshgit
+  chocoInstall puretext
   chocoToTaskbar tailblazer "C:\ProgramData\chocolatey\lib\tailblazer\tools" "TailBlazer.exe"
 
   linkFile Windows\ConEmu.xml $env:AppData\ConEmu.xml
