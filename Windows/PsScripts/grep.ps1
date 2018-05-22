@@ -1,1 +1,1 @@
-ls -r | Select-String -pattern $args[0]
+Get-ChildItem -r | Select-String -pattern $args[0]
