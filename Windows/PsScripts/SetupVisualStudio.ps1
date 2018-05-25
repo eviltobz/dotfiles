@@ -23,8 +23,12 @@ function SetVS_Pre2017($version = "12.0")
 function SetVS_Post2017($version = "12.0")
 {
   $key = get-ItemProperty "HKLM:SOFTWARE\WOW6432Node\Microsoft\VisualStudio\SxS\VS7"
-  $rootPath = [System.IO.Path]::GetDirectoryName($($key.$version))
-  Echo "Skipping VisualStudio $version setup... rootpath would be $rootPath"
+  if($($key.$version) -eq $null) {
+    Echo "VisualStudio not found at $rootPath"
+  } else {
+    $rootPath = [System.IO.Path]::GetDirectoryName($($key.$version))
+    Echo "Skipping VisualStudio $version setup... rootpath would be $rootPath"
+  }
 }
 
 #SetVS_Pre2017("11.0")

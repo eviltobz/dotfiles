@@ -28,7 +28,7 @@ function ensureFolder ($path) {
 function gitGet ($name, $dest, $source) {
   if(-not (Test-Path $dest)) {
     Write-Host "Pulling $name from $source into $dest"
-    git clone $source $dest
+    git clone --depth=1 $source $dest
   } else {
     Write-Host "Already have the git repo $name pulled." -f red
     Write-Host "Maybe we should do a pull here, keep it up to date..." -f red
@@ -89,19 +89,22 @@ function DoSetup() {
   chocoInstall puretext
   chocoToTaskbar tailblazer "C:\ProgramData\chocolatey\lib\tailblazer\tools" "TailBlazer.exe"
 
-  linkFile Windows\ConEmu.xml $env:AppData\ConEmu.xml
+  Remove-Item "C:\Program Files\ConEmu\ConEmu.xml" 
+  linkFile Windows\ConEmu.xml "C:\Program Files\ConEmu\ConEmu.xml" 
 
 # Common settings
   linkFolder . $env:userprofile\dotfiles
 
   linkFile .\vim\vimrc $env:userprofile\_vimrc
   linkFile .\vim\vsvimrc $env:userprofile\_vsvimrc
+  linkFolder .\vim $env:userprofile\vimfiles
   ensureFolder .\vim\backups
   ensureFolder .\vim\bundle
   ensureFolder .\vim\autoload
 
   Invoke-WebRequest https://tpo.pe/pathogen.vim -outfile ./vim/autoload/pathogen.vim
   gitGet NERDtree ./vim/bundle/nerdtree https://github.com/scrooloose/nerdtree.git
+  gitGet Syntastic ./vim/bundle/syntastic https://github.com/vim-syntastic/syntastic.git
 
   git config --global core.editor vim
 }
