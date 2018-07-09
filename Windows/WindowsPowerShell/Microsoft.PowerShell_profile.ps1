@@ -23,8 +23,9 @@ function cddot {
 }
 
 $PRIVATE:UtilsPath = "C:\Utils"
-$CommonScripts = "$home\dotfiles\windows\PsScripts"
-$PRIVATE:WorkScripts = "$CommonScripts\work\15below\"
+$PRIVATE:RootPath = "$home\dotfiles"
+$CommonScripts = "$RootPath\windows\PsScripts"
+$PRIVATE:WorkScripts = "$RootPath\Work\15below\PowershellScripts"
 	
 function EditProfile() { vi $profile }
 function EditVimrc() { vi $home\_vimrc }
@@ -42,17 +43,18 @@ new-alias vi vim
 $env:GIT_SSH = "C:\Program Files (x86)\GitExtensions\PuTTY\plink.exe"
 
 # My Scripts
-$env:Path += ";.\;$CommonScripts;$WorkScripts;$UtilsPath\CliApps;C:\dev\CommandLineUtils\loc\bin\Debug;" + "C:\dev\CommandLineUtils\objKilla\bin\Debug"
+$env:Path += ";.\;$CommonScripts;$WorkScripts" #;$UtilsPath\CliApps;C:\git\eviltobz\loc\Loc\bin\Debug;" + "C:\dev\CommandLineUtils\objKilla\bin\Debug"
 . "$CommonScripts\unixey.ps1"
 
 
 # General Work Utils
-$env:Path += ";$UtilsPath\CliApps\OctopusDeployHelper;$UtilsPath\CliApps\Octopus2DeployHelper;C:\Utils\CliApps\BuildOctopusProject;C:\dev\sourc0\.paket"
+#$env:Path += ";$UtilsPath\CliApps\OctopusDeployHelper;$UtilsPath\CliApps\Octopus2DeployHelper;C:\Utils\CliApps\BuildOctopusProject;C:\dev\sourc0\.paket"
 
 
 # Do these need to go before all the common scripts?!?!?! lets try to shift work scripts to the end, then wrap em all up in a single work one
-. "$WorkScripts\Set-Locations.ps1"
-. "$WorkScripts\SetWorkingDir.ps1"
+#. "$WorkScripts\Set-Locations.ps1"
+#. "$WorkScripts\SetWorkingDir.ps1"
+. "$WorkScripts\WorkProfile.ps1"
 
 
 

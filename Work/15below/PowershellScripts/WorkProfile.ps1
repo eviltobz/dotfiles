@@ -1,15 +1,6 @@
-function cd-source()
-{
-	cd c:\git\source
-}
-function cd-LXA()
-{
-	cd c:\git\source\ClientSpecific\LXA
-}
-#function cd-sourc1()
-#{
-#cd c:\dev\sourc1
-#}
+function cd-source() { cd c:\git\source }
+function cd-client($Code) { cd "c:\git\source\ClientSpecific\$Code" }
+
 function acc()
 {
   cd-source
@@ -23,7 +14,7 @@ function accQ()
   echo "QuickAcceptance return code: $LastExitCode"
 }
 
-function fbuild()
+function bld()
 {
   cd-source
   iex ".\build.bat $args"
@@ -41,9 +32,17 @@ function facc()
 }
 
 new-alias cds cd-source
-new-alias cdlx cd-LXA
+function cdlx { cd-client("LXA") }
+function cdly { cd-client("LY") }
+
 $pwd = pwd
 if( ("$pwd" -eq "C:\Users\toby.carter") -or ("$pwd" -eq "C:\tools\cmder") -or ("$pwd" -eq "E:\tobz\Cmder_mini"))
 {
 	cd-source
 }
+
+$QDrive = '\\15belowsbs\15Below\'
+
+# General Work Utils
+$env:Path += ";C:\git\eviltobz\loc\Loc\bin\Debug;" + "C:\git\eviltobz\CommandLineUtils\objKilla\bin\Debug"
+#$env:Path += ";$UtilsPath\CliApps\OctopusDeployHelper;$UtilsPath\CliApps\Octopus2DeployHelper;C:\Utils\CliApps\BuildOctopusProject;C:\dev\sourc0\.paket"
