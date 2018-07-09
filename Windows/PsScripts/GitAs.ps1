@@ -6,17 +6,23 @@ if ($args[0] -eq $null) {
 
 $eviltobz = "eviltobz","evil","tobz"
 $15b = "15b","toby.carter"
-if(-not $eviltobz.contains($user) -and -not $15b.contains($user)) {
-  Write-Host "Please provide a valid user (eviltobz, 15b)"
+if($user -eq "") {
+  Write-Host "Current git config" -f Green  
 } else {
-  if($eviltobz.contains($user)) {
-    git config --global user.email eviltobz@hotmail.com
-    git config --global user.name eviltobz
+    if( -not $eviltobz.contains($user) -and -not $15b.contains($user)) {
+    Write-Host "User '" -nonewline; Write-Host $user -f Red -nonewline; Write-Host "' is not supported. Please provide a valid user (" -nonewline
+      Write-Host "$eviltobz / $15b" -f Green -nonewline; Write-Host ")"
   } else {
-    git config --global user.email toby.carter@15below.com
-    git config --global user.name "toby carter"
+    if($eviltobz.contains($user)) {
+      git config --global user.email eviltobz@hotmail.com
+      git config --global user.name eviltobz
+    } else {
+      git config --global user.email toby.carter@15below.com
+      git config --global user.name "toby carter"
+    }
+    Write-Host "...note - i may still need to do something about setting up git keys..." -foregroundcolor yellow
   }
 }
 
-Write-Host "...note - i may still need to do something about setting up git keys..." -foregroundcolor yellow
-GitWho
+Write-Host "UserName: " -nonewline; Write-Host $(git config user.name) -f Yellow
+Write-Host "Email   : " -nonewline; Write-Host $(git config user.email) -f Yellow
