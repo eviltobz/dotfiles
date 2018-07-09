@@ -1,4 +1,8 @@
-$user = $args[0].ToLower();
+if ($args[0] -eq $null) {
+  $user = ""
+} else {
+  $user = $args[0].ToLower();
+}
 
 $eviltobz = "eviltobz","evil","tobz"
 $15b = "15b","toby.carter"
