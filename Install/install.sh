@@ -74,7 +74,7 @@ function gitGet {
     echo -e "${YELLOW}$NAME already pulled"
   else
     echo -e "${GREEN}Pulling $NAME from $SOURCE into $DEST"
-    git clone $SOURCE $DEST 
+    git clone --depth=1 $SOURCE $DEST 
     rm -rf $DEST/.git
     rm $DEST/.gitignore
     gitignore $2
@@ -101,6 +101,13 @@ gitGet NERDtree vim/bundle/nerdtree https://github.com/scrooloose/nerdtree.git
 gitGet syntastic vim/bundle/syntastic https://github.com/vim-syntastic/syntastic.git
 # Idris extensions
 gitGet idris-vim vim/bundle/idris-vim https://github.com/idris-hackers/idris-vim.git
+# Rust & TOML
+gitGet rust.vim vim/bundle/rust.vim https://github.com/rust-lang/rust.vim.git
+gitGet vim-toml vim/bundle/vim-toml https://github.com/cespare/vim-toml.git
+gitGet async.vim vim/bundle/async.vim https://github.com/prabirshrestha/async.vim.git
+gitGet vim-lsp vim/bundle/vim-lsp https://github.com/prabirshrestha/vim-lsp.git
+gitGet asyncomplete.vim vim/bundle/asyncomplete.vim https://github.com/prabirshrestha/asyncomplete.vim.git
+gitGet asyncomplete-lsp.vim vim/bundle/asyncomplete-lsp.vim https://github.com/prabirshrestha/asyncomplete-lsp.vim.git
 
 gitGet oh-my-zsh nix/oh-my-zsh git://github.com/robbyrussell/oh-my-zsh.git
 

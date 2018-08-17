@@ -9,5 +9,11 @@ vim/bundle/nerdtree
 nix/tmux/tmux/plugins
 vim/bundle/idris-vim
 vim/bundle/syntastic
+vim/bundle/rust.vim
+vim/bundle/vim-toml
+vim/bundle/async.vim
+vim/bundle/vim-lsp
+vim/bundle/asyncomplete.vim
+vim/bundle/asyncomplete-lsp.vim
 nix/tmux/tmux/plugins/tpm
 Windows/WindowsPowerShell/Modules/posh-git
