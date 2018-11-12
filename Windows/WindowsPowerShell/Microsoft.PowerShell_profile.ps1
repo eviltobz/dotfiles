@@ -23,9 +23,9 @@ function cddot {
 }
 
 $PRIVATE:UtilsPath = "C:\Utils"
-$PRIVATE:RootPath = "$home\dotfiles"
-$CommonScripts = "$RootPath\windows\PsScripts"
-$PRIVATE:WorkScripts = "$RootPath\Work\15below\PowershellScripts"
+$DotfilesPath = "$home\dotfiles"
+$CommonScripts = "$DotfilesPath\windows\PsScripts"
+$PRIVATE:WorkScripts = "$DotfilesPath\Work\15below\PowershellScripts"
 	
 function EditProfile() { vi $profile }
 function EditVimrc() { vi $home\_vimrc }
@@ -33,6 +33,7 @@ function EditHosts() { vi "C:\Windows\System32\Drivers\etc\hosts" }
 function ShowScripts() { cd "$CommonScripts"; ls }
 function clls() { cls; ls} 
 function cdls($path) { cd $path; ls} 
+function cddot() { cd $DotfilesPath; ls} 
 echo "Use EditProfile EditHosts & EditVimrc to edit configuration"
 echo "Running as admin = $(isAdmin;)"
 
@@ -64,3 +65,5 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
+
+gitas
