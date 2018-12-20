@@ -1,0 +1,10 @@
+old settings
+ctrl+tab - window.nextdocumentwindownav - little dialogish menu of recent activity
+
+new settings
+ctrl+N - Next - window.nextdocumentwindow
+ctrl+P - Prev - window.previousdocumentwindow
+
+
+
+?? next pane stuff? next document window?...
