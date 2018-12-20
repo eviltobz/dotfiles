@@ -24,13 +24,14 @@ function cddot {
 
 $PRIVATE:UtilsPath = "C:\Utils"
 $DotfilesPath = "$home\dotfiles"
-$CommonScripts = "$DotfilesPath\windows\PsScripts"
+$PsScripts = "$DotfilesPath\windows\PsScripts"
+#$AhkScripts = "$DotfilesPath\windows\AutoHotKeyScripts"
 $PRIVATE:WorkScripts = "$DotfilesPath\Work\15below\PowershellScripts"
 	
 function EditProfile() { vi $profile }
 function EditVimrc() { vi $home\_vimrc }
 function EditHosts() { vi "C:\Windows\System32\Drivers\etc\hosts" }
-function ShowScripts() { cd "$CommonScripts"; ls }
+function ShowScripts() { cd "$PsScripts"; ls }
 function clls() { cls; ls} 
 function cdls($path) { cd $path; ls} 
 function cddot() { cd $DotfilesPath; ls} 
@@ -39,13 +40,14 @@ echo "Running as admin = $(isAdmin;)"
 
 # Common 3rd Party Apps
 new-alias vi vim
-& "$CommonScripts\SetupVisualStudio.ps1"
+& "$PsScripts\SetupVisualStudio.ps1"
 . 'C:\Users\toby.carter\Documents\WindowsPowerShell\Modules\posh-git\profile.example.ps1' # Load posh-git example profile
 $env:GIT_SSH = "C:\Program Files (x86)\GitExtensions\PuTTY\plink.exe"
+#AutoHotKey "$AhkScripts\WinWarden\WinWarden.ahk"
 
 # My Scripts
-$env:Path += ";.\;$CommonScripts;$WorkScripts" #;$UtilsPath\CliApps;C:\git\eviltobz\loc\Loc\bin\Debug;" + "C:\dev\CommandLineUtils\objKilla\bin\Debug"
-. "$CommonScripts\unixey.ps1"
+$env:Path += ";.\;$PsScripts;$WorkScripts" 
+. "$PsScripts\unixey.ps1"
 
 
 # General Work Utils

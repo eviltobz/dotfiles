@@ -1,5 +1,7 @@
-function cd-source() { cd c:\git\source }
-function cd-client($Code) { cd "c:\git\source\ClientSpecific\$Code" }
+$gitPath = 'd:\git'
+
+function cd-source() { cd $gitPath\source }
+function cd-client($Code) { cd "$gitPath\source\ClientSpecific\$Code" }
 
 function acc()
 {
@@ -44,5 +46,5 @@ if( ("$pwd" -eq "C:\Users\toby.carter") -or ("$pwd" -eq "C:\tools\cmder") -or ("
 $QDrive = '\\15belowsbs\15Below\'
 
 # General Work Utils
-$env:Path += ";C:\git\eviltobz\loc\Loc\bin\Debug;" + "C:\git\eviltobz\CommandLineUtils\objKilla\bin\Debug"
+$env:Path += ";$gitPath\eviltobz\loc\Loc\bin\Debug;" + "$gitPath\eviltobz\CommandLineUtils\objKilla\bin\Debug"
 #$env:Path += ";$UtilsPath\CliApps\OctopusDeployHelper;$UtilsPath\CliApps\Octopus2DeployHelper;C:\Utils\CliApps\BuildOctopusProject;C:\dev\sourc0\.paket"
