@@ -1,77 +1,27 @@
-"   ************   MAIN VIMRC!!!!!!!!!
-"
-"  Configuring powershell for the vim shell
-  " this could do with being pulled out to a different file and sourced for better source control across platforms
-
-if has("unix")
-  " also set in gui mode - bad in windows command line
-  set cursorcolumn 
-  set cursorline
-
-  if (system('uname') == "Darwin\n")
-    " OSX
-  endif
-
-  if (system('uname') == "Linux\n")
-    " LINUX
-  endif
-elseif has("win32")
-  " WINDOWS
-  set shell=powershell
-  set shellcmdflag=-NoLogo\ -NoProfile\ -NonInteractive\ -ExecutionPolicy\ RemoteSigned
-  set shellpipe=|
-  set shellredir=>
-endif
-
-" Taken hints from vi-improved.org/vimrc.html and vim.wikia.com/wiki/example_vimrc
-
-" Quckly tap jk to go to normal mode :)
-"inoremap jk <ESC>
-"vnoremap jk <ESC>
-" falls through to ESC mapping for added :nohlsearch in normal mode
-"nmap jk <ESC> 
-"set timeoutlen=100 " nice and quick bailing on mappings
-  " may need to separately set ttimeout stuff at some point...
-  " timeoutlen effects <Leader> grammar
-
-
+" Settings for proper vim/neovim
 
 
 " Navigation stuff
 " turbo cursor navigation
-" " NOTE - I had commented this out due to VsVim inserting the text rather
-" than remapping...
 nnoremap <silent> <Left> @='5h'<CR>|xnoremap <silent> <Left> @='5h'<CR> "|onoremap <Left> 5h|
 nnoremap <silent> <Up> @='5k'<CR>|xnoremap <silent> <Up> @='5k'<CR> "|onoremap <Up> 5k|
 nnoremap <silent> <Down> @='5j'<CR>|xnoremap <silent> <Down> @='5j'<CR> "|onoremap <Down> 5j|
 nnoremap <silent> <Right> @='5l'<CR>|xnoremap <silent> <Right> @='5l'<CR> "|onoremap <Right> 5l|
 
-" Word-wrapped lines navigable with j & k
-nmap j gj
-nmap k gk
-
-
-
-
 
 " mappings
-" Y yanks to end of line, change to nnoremap???
-map Y y$ 
 " Save with sudo
 cmap w!! %!sudo tee > /dev/null %
-" map escape to clear highlight -- changing to double space due to terminal foobar with escape codes
-" nnoremap <ESC> :nohlsearch<CR><ESC> 
+
 
 " General UI Settings
 syntax on
 filetype on
 filetype plugin indent on
-
 " au(tomatically) apply syntax to filetypes when loaded
 au BufNewFile,BufRead *.config set filetype=xml
 
 set nocompatible " vim not vi
-set scrolloff=5 " scroll before hitting the edge
 set display=lastline " show what can be seen of long, wrapping-lines as you scroll, rather than waiting til it all fits the screen (which it may never do)
 set display+=uhex " and show unicode values for undisplayable chars rather than odd control char thingies
 "highlight cursorline ctermbg=1 "dark blue background for readability
@@ -80,17 +30,10 @@ set ruler
 set laststatus=2
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 set noerrorbells visualbell " stop beeping all the time
-" show line numbers for wapping cursor to a line with :<line number> or <line number>G
-set number
+
 " gvim stuff
 if has("gui_running") " Some stuff suitable for gvim might be less good for the terminal
   set lines=45 columns=160
-  " Good on Windows, may want to find options for OSX / Linux
-  set guifont=Consolas:h9:cANSI
-  " crosshairs - Cool but messy in commandline mode
-  set cursorcolumn 
-  set cursorline
-  " different options for macvim? different conditional check???
 endif
 " other recommended stuff...
 set wildmenu
@@ -106,17 +49,7 @@ set shiftwidth=2
 set autoindent
 set backspace=indent,eol,start
 
-" tab & shift tab for indenting highlighted line & keeping highlight active
-vmap <TAB> >gv
-vmap <S-TAB> <gv
 
-" search options & highlighting
-  " goodness with case
-set ignorecase
-set smartcase
-  " highlight all matches & do incremental search to first instance
-set hlsearch
-set incsearch
 " keep backup/restore/swap type files out of the way, rather than in the same folder
 set backupdir=~/dotfiles/vim/backups
 set directory=~/dotfiles/vim/backups
@@ -176,9 +109,6 @@ let g:idris_indent_rewrite = 8
 
 " Leader grammar
 " This is pretty nice with the textblade. Space for leader, add slash for localLeader.
-let mapleader = " "
-let maplocalleader = "\\" 
-nnoremap <Leader><Leader> :nohlsearch<CR>
 
 " b - Buffer
   " buffer mini menu - list buffers, and prompt for number to select
@@ -205,8 +135,6 @@ nnoremap <Leader>fr :so $MYVIMRC<CR>     " source - re-source .vimrc
 
 
 " s - Selection
-" Select All
-nnoremap <Leader>sa ggVG 
 " copy & paste to system clipboard -- NOTE using + instead of * was this a linux thing? do i need to do more OS checks?
 vmap <Leader>sy "+y
 vmap <Leader>sd "+d
