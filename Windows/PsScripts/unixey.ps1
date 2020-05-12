@@ -39,6 +39,13 @@ function take($foldername) {
   cd $foldername
 }
 
-Write-Host "Loaded Unixey overrides - touch, rm -rf, ls -lah, l, ll, take"
-remove-item alias:rm
-remove-item alias:ls
+function time($block) {
+    $sw = [Diagnostics.Stopwatch]::StartNew()
+    &$block
+    $sw.Stop()
+    $sw.Elapsed
+}
+
+Write-Host "Loaded Unixey overrides - touch, rm -rf, ls -lah, l, ll, take, time"
+remove-item alias:rm -ErrorAction SilentlyContinue
+remove-item alias:ls -ErrorAction SilentlyContinue

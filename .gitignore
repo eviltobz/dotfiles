@@ -11,3 +11,4 @@ vim/bundle/idris-vim
 vim/bundle/syntastic
 nix/tmux/tmux/plugins/tpm
 Windows/WindowsPowerShell/Modules/posh-git
+nix/oh-my-zsh/plugins/zsh-autosuggestions

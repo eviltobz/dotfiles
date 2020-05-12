@@ -18,6 +18,14 @@ function isAdmin {
       $principal.IsInRole($admin)  
 } 
 
+function admin {
+  if(isAdmin) {
+    Write-Host "Running as " -nonewline; Write-Host "admin." -f Green
+  } else {
+    Write-Host "Running as " -nonewline; Write-Host "standard user." -f Red
+  }
+}
+
 function cddot {
   cd $home\dotfiles
 }
@@ -26,7 +34,7 @@ $PRIVATE:UtilsPath = "C:\Utils"
 $DotfilesPath = "$home\dotfiles"
 $PsScripts = "$DotfilesPath\windows\PsScripts"
 #$AhkScripts = "$DotfilesPath\windows\AutoHotKeyScripts"
-$PRIVATE:WorkScripts = "$DotfilesPath\Work\15below\PowershellScripts"
+$WorkScripts = "$DotfilesPath\Work\15below\PowershellScripts"
 	
 function EditProfile() { vi $profile }
 function EditVimrc() { vi $home\_vimrc }
@@ -36,10 +44,10 @@ function clls() { cls; ls}
 function cdls($path) { cd $path; ls} 
 function cddot() { cd $DotfilesPath; ls} 
 echo "Use EditProfile EditHosts & EditVimrc to edit configuration"
-echo "Running as admin = $(isAdmin;)"
+admin
 
 # Common 3rd Party Apps
-new-alias vi vim
+new-alias vi vim -Force
 & "$PsScripts\SetupVisualStudio.ps1"
 . 'C:\Users\toby.carter\Documents\WindowsPowerShell\Modules\posh-git\profile.example.ps1' # Load posh-git example profile
 $env:GIT_SSH = "C:\Program Files (x86)\GitExtensions\PuTTY\plink.exe"
@@ -48,6 +56,7 @@ $env:GIT_SSH = "C:\Program Files (x86)\GitExtensions\PuTTY\plink.exe"
 # My Scripts
 $env:Path += ";.\;$PsScripts;$WorkScripts" 
 . "$PsScripts\unixey.ps1"
+& "$PsScripts\DockerUtils.ps1"
 
 
 # General Work Utils
@@ -58,7 +67,7 @@ $env:Path += ";.\;$PsScripts;$WorkScripts"
 #. "$WorkScripts\Set-Locations.ps1"
 #. "$WorkScripts\SetWorkingDir.ps1"
 . "$WorkScripts\WorkProfile.ps1"
-
+$env:Path += ";D:\git\eviltobz\ObjKilla\bin\Debug\"
 
 
 

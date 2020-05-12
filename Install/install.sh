@@ -70,6 +70,7 @@ function gitGet {
   NAME=$1
   DEST=~/dotfiles/$2
   SOURCE=$3
+    echo -e "${RED}gitGet should check for changes & prompt for an update!!!!"
   if [ -e $DEST ]; then
     echo -e "${YELLOW}$NAME already pulled"
   else
@@ -97,10 +98,13 @@ curlGet Pathogen vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 # Vim plugins
 # File browser
 gitGet NERDtree vim/bundle/nerdtree https://github.com/scrooloose/nerdtree.git
+# zsh autosuggestion
+gitGet zsh-autosuggestions nix/oh-my-zsh/plugins/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
+
 # Generic syntax checking
 gitGet syntastic vim/bundle/syntastic https://github.com/vim-syntastic/syntastic.git
 # Idris extensions
-gitGet idris-vim vim/bundle/idris-vim https://github.com/idris-hackers/idris-vim.git
+#gitGet idris-vim vim/bundle/idris-vim https://github.com/idris-hackers/idris-vim.git
 
 gitGet oh-my-zsh nix/oh-my-zsh git://github.com/robbyrussell/oh-my-zsh.git
 

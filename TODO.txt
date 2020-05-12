@@ -1,0 +1,4 @@
+Make global gitignore stuff
+install to link tobz theme to zsh themes folder
+
+...

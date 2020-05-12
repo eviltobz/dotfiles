@@ -38,6 +38,7 @@ function ensureFolder ($path) {
 }
 
 function gitGet ($name, $dest, $source) {
+    Write-Host "gitGet should check for changes & prompt for an update" -f red
   if(-not (Test-Path $dest)) {
     Write-Host "Pulling $name from $source into $dest"
     git clone --depth=1 $source $dest

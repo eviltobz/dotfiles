@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2018-05-17 09:24:07" build="180416">
+		<key name=".Vanilla" modified="2018-07-09 06:28:32" build="180416">
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
@@ -9,7 +9,7 @@
 			<value name="StartFarFolders" type="hex" data="00"/>
 			<value name="StartFarEditors" type="hex" data="00"/>
 			<value name="ColorTable00" type="dword" data="00000000"/>
-			<value name="ColorTable01" type="dword" data="00800000"/>
+			<value name="ColorTable01" type="dword" data="00500000"/>
 			<value name="ColorTable02" type="dword" data="00008000"/>
 			<value name="ColorTable03" type="dword" data="00808000"/>
 			<value name="ColorTable04" type="dword" data="00000080"/>
@@ -23,7 +23,7 @@
 			<value name="ColorTable12" type="dword" data="000000ff"/>
 			<value name="ColorTable13" type="dword" data="00ff00ff"/>
 			<value name="ColorTable14" type="dword" data="0000ffff"/>
-			<value name="ColorTable15" type="dword" data="00ffffff"/>
+			<value name="ColorTable15" type="dword" data="0000ffff"/>
 			<value name="ColorTable16" type="dword" data="00000000"/>
 			<value name="ColorTable17" type="dword" data="00800000"/>
 			<value name="ColorTable18" type="dword" data="00008000"/>
@@ -45,7 +45,7 @@
 			<value name="TextColorIdx" type="hex" data="06"/>
 			<value name="BackColorIdx" type="hex" data="05"/>
 			<value name="PopTextColorIdx" type="hex" data="03"/>
-			<value name="PopBackColorIdx" type="hex" data="0f"/>
+			<value name="PopBackColorIdx" type="hex" data="0F"/>
 			<value name="SingleInstance" type="hex" data="00"/>
 			<value name="QuakeStyle" type="hex" data="00"/>
 			<value name="KeyboardHooks" type="hex" data="01"/>
@@ -59,7 +59,7 @@
 			<value name="FontSize" type="ulong" data="11"/>
 			<value name="StatusFontHeight" type="long" data="12"/>
 			<value name="TabFontHeight" type="long" data="13"/>
-			<key name="HotKeys" modified="2018-02-12 16:51:46" build="180108">
+			<key name="HotKeys" modified="2018-06-05 08:42:44" build="180416">
 				<value name="MinimizeRestore" type="dword" data="000011c0"/>
 				<value name="KeyMacroVersion" type="hex" data="02"/>
 				<value name="Multi.Modifier" type="dword" data="000000a2"/>
@@ -245,23 +245,24 @@
 				<value name="KeyMacro31.Text" type="string" data=""/>
 				<value name="KeyMacro32" type="dword" data="00000000"/>
 				<value name="KeyMacro32.Text" type="string" data=""/>
-				<value name="CTS.VkBlock" type="hex" data="a4"/>
-				<value name="CTS.VkText" type="hex" data="a0"/>
+				<value name="CTS.VkBlock" type="hex" data="A4"/>
+				<value name="CTS.VkText" type="hex" data="A0"/>
 				<value name="CTS.VkAct" type="hex" data="00"/>
 				<value name="CTS.VkPrompt" type="hex" data="00"/>
-				<value name="FarGotoEditorVk" type="hex" data="a2"/>
+				<value name="FarGotoEditorVk" type="hex" data="A2"/>
 				<value name="DndLKey" type="hex" data="00"/>
-				<value name="DndRKey" type="hex" data="a2"/>
+				<value name="DndRKey" type="hex" data="A2"/>
 				<value name="WndDragKey" type="dword" data="00121101"/>
+				<value name="Multi.NewWndConfirm" type="dword" data="00000000"/>
 			</key>
 			<value name="CmdLineHistory" type="multi">
-				<line data="{Shells::cmd}"/>
-				<line data="{Shells::cmd (Admin)}"/>
+				<line data="{ps}"/>
 				<line data="{zsh}"/>
+				<line data="{Shells::cmd (Admin)}"/>
+				<line data="{Shells::cmd}"/>
 				<line data="{Bash::bash}"/>
 				<line data="{Shells::cmd 64/32}"/>
 				<line data="{Shells::cmd-32}"/>
-				<line data="{ps}"/>
 				<line data="{Helper::Show ANSI colors}"/>
 				<line data="{Shells::PowerShell (Admin)}"/>
 			</value>
@@ -270,17 +271,17 @@
 			<value name="Cascaded" type="hex" data="01"/>
 			<value name="IntegralSize" type="hex" data="00"/>
 			<value name="WindowMode" type="dword" data="0000051f"/>
-			<value name="ConWnd X" type="long" data="-165"/>
-			<value name="ConWnd Y" type="long" data="-851"/>
+			<value name="ConWnd X" type="long" data="513"/>
+			<value name="ConWnd Y" type="long" data="-941"/>
 			<value name="LastMonitor" type="string" data="-229,-1080,1691,0"/>
-			<value name="ConWnd Width" type="dword" data="00000120"/>
-			<value name="ConWnd Height" type="dword" data="00000038"/>
+			<value name="ConWnd Width" type="dword" data="000000c4"/>
+			<value name="ConWnd Height" type="dword" data="0000003d"/>
 			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="StartCreateDelay" type="ulong" data="100"/>
 			<value name="ExtendFonts" type="hex" data="00"/>
 			<value name="ExtendFontNormalIdx" type="hex" data="01"/>
-			<value name="ExtendFontBoldIdx" type="hex" data="0c"/>
-			<value name="ExtendFontItalicIdx" type="hex" data="0d"/>
+			<value name="ExtendFontBoldIdx" type="hex" data="0C"/>
+			<value name="ExtendFontItalicIdx" type="hex" data="0D"/>
 			<value name="CursorTypeActive" type="dword" data="000232c1"/>
 			<value name="CursorTypeInactive" type="dword" data="00823283"/>
 			<value name="ClipboardDetectLineEnd" type="hex" data="01"/>
@@ -298,7 +299,7 @@
 			<value name="VividColors" type="hex" data="01"/>
 			<value name="FadeInactive" type="hex" data="01"/>
 			<value name="FadeInactiveLow" type="hex" data="00"/>
-			<value name="FadeInactiveHigh" type="hex" data="d0"/>
+			<value name="FadeInactiveHigh" type="hex" data="D0"/>
 			<value name="ConVisible" type="hex" data="00"/>
 			<value name="SetDefaultTerminal" type="hex" data="00"/>
 			<value name="SetDefaultTerminalStartup" type="hex" data="00"/>
@@ -361,13 +362,13 @@
 			<value name="CompressLongStrings" type="hex" data="01"/>
 			<value name="BackGround Image show" type="hex" data="00"/>
 			<value name="BackGround Image" type="string" data="c:\back.bmp"/>
-			<value name="bgImageDarker" type="hex" data="ff"/>
+			<value name="bgImageDarker" type="hex" data="FF"/>
 			<value name="bgImageColors" type="dword" data="ffffffff"/>
 			<value name="bgOperation" type="hex" data="00"/>
 			<value name="bgPluginAllowed" type="hex" data="01"/>
-			<value name="AlphaValue" type="hex" data="ff"/>
+			<value name="AlphaValue" type="hex" data="FF"/>
 			<value name="AlphaValueSeparate" type="hex" data="00"/>
-			<value name="AlphaValueInactive" type="hex" data="ff"/>
+			<value name="AlphaValueInactive" type="hex" data="FF"/>
 			<value name="UserScreenTransparent" type="hex" data="00"/>
 			<value name="ColorKeyTransparent" type="hex" data="00"/>
 			<value name="ColorKeyValue" type="dword" data="00010101"/>
@@ -377,7 +378,7 @@
 			<value name="HideChildCaption" type="hex" data="01"/>
 			<value name="FocusInChildWindows" type="hex" data="01"/>
 			<value name="HideCaptionAlways" type="hex" data="01"/>
-			<value name="HideCaptionAlwaysFrame" type="hex" data="ff"/>
+			<value name="HideCaptionAlwaysFrame" type="hex" data="FF"/>
 			<value name="HideCaptionAlwaysDelay" type="ulong" data="2000"/>
 			<value name="HideCaptionAlwaysDisappear" type="ulong" data="2000"/>
 			<value name="DownShowHiddenMessage" type="hex" data="00"/>
@@ -414,7 +415,7 @@
 			<value name="CTS.ForceLocale" type="dword" data="00000000"/>
 			<value name="CTS.RBtnAction" type="hex" data="03"/>
 			<value name="CTS.MBtnAction" type="hex" data="00"/>
-			<value name="CTS.ColorIndex" type="hex" data="e0"/>
+			<value name="CTS.ColorIndex" type="hex" data="E0"/>
 			<value name="ClipboardConfirmEnter" type="hex" data="01"/>
 			<value name="ClipboardConfirmLonger" type="ulong" data="2000"/>
 			<value name="FarGotoEditorOpt" type="hex" data="01"/>
@@ -427,9 +428,9 @@
 			<value name="ExtendUCharMap" type="hex" data="01"/>
 			<value name="EnhanceGraphics" type="hex" data="01"/>
 			<value name="EnhanceButtons" type="hex" data="00"/>
-			<value name="PartBrush75" type="hex" data="c8"/>
+			<value name="PartBrush75" type="hex" data="C8"/>
 			<value name="PartBrush50" type="hex" data="96"/>
-			<value name="PartBrush25" type="hex" data="5a"/>
+			<value name="PartBrush25" type="hex" data="5A"/>
 			<value name="PartBrushBlack" type="hex" data="20"/>
 			<value name="RightClick opens context menu" type="hex" data="02"/>
 			<value name="RightClickMacro2" type="string" data=""/>
@@ -610,12 +611,12 @@
 			<value name="Update.PostUpdateCmd" type="string" data="echo Last successful update&gt;ConEmuUpdate.info &amp;&amp; date /t&gt;&gt;ConEmuUpdate.info &amp;&amp; time /t&gt;&gt;ConEmuUpdate.info"/>
 			<key name="Tasks" modified="2018-02-12 16:51:46" build="180108">
 				<value name="Count" type="long" data="12"/>
-				<key name="Task1" modified="2018-02-12 16:51:46" build="180108">
+				<key name="Task1" modified="2018-06-05 08:44:04" build="180416">
 					<value name="Name" type="string" data="{ps}"/>
 					<value name="Flags" type="dword" data="00000007"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data='powershell.exe -new_console:a:P:"&lt;PowerShell&gt;"'/>
+					<value name="Cmd1" type="string" data='powershell.exe -new_console:a:P:"&lt;Current color scheme&gt;"'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
@@ -729,6 +730,8 @@
 			<key name="Colors" modified="2018-02-12 16:51:46" build="180108">
 				<value name="Count" type="long" data="0"/>
 			</key>
+			<value name="Language" type="string" data="en"/>
+			<value name="RestoreInactive" type="hex" data="00"/>
 		</key>
 	</key>
 </key>

@@ -8,7 +8,7 @@ export ZSH=~/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="muse"
+ZSH_THEME="tobz"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -52,7 +52,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -77,6 +77,8 @@ export EDITOR='vim'
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -87,3 +89,31 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cls=clear
 
+
+
+# Prolly need to pull this out to a work-specific includey file
+export DOCKER_HOST=tcp://localhost:2375
+#export PATH=/mnt/C/Windows/System32/WindowsPowerShell/v1.0:$PATH
+alias psh=/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
+#alias gvim='/mnt/c/Program\ Files\ \(x86\)/vim/vim80/gvim.exe'
+alias clls="clear ; ls"
+alias cll="clear ; l"
+
+gvim()
+{
+  #'/mnt/c/Program\ Files\ \(x86\)/vim/vim80/gvim.exe' "$@" &
+  /mnt/c/Program\ Files\ \(x86\)/vim/vim80/gvim.exe "$@" &
+}
+
+
+#source <(kubectl completion zsh)
+source ~/.zshrc_kube
+
+# Output the current distro/release version when starting a prompt
+# This would be better if it were just the first time a loginny thing runs...
+[ -r /etc/lsb-release ] && . /etc/lsb-release
+#if [ -z "$DISTRIB_DESCRIPTION" ] && [ -x /usr/bin/lsb_release ]; then
+  # Fall back to using the very slow lsb_release utility
+  #DISTRIB_DESCRIPTION=$(lsb_release -s -d)
+#fi
+printf "%s (%s)\n" 
