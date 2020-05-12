@@ -23,6 +23,13 @@ elseif has("win32")
   set shellredir=>
 endif
 
+" Added some styling which may make it better in windows...
+set cursorcolumn
+set cursorline
+hi CursorColumn term=bold cterm=bold ctermbg=238
+"hi CursorLine term=bold,underline cterm=bold,underline
+hi CursorLine term=underline cterm=underline
+
 " Taken hints from vi-improved.org/vimrc.html and vim.wikia.com/wiki/example_vimrc
 
 " Quckly tap jk to go to normal mode :)
@@ -154,6 +161,13 @@ let g:idris_indent_case = 5
 let g:idris_indent_where = 6
 let g:idris_indent_rewrite = 8
 
+if executable('rls')
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'rls',
+    \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+    \ 'whitelist': ['rust'],
+    \ })
+endif
 
 " command line movement keys
 "cnoremap <C-a>  <Home>
