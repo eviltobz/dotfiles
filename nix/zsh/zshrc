@@ -59,7 +59,11 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+if [ -e '/lib/rustlib' ] ; then
+  export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+else
+  echo -e "\033[0;35m /lib/rustlib not found.\033[0m Not setting RUST_SRC_PATH"
+fi
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -108,7 +112,11 @@ gvim()
 
 
 #source <(kubectl completion zsh)
-source ~/.zshrc_kube
+if [ -e '~/.zshrc_kube' ] ; then
+  source ~/.zshrc_kube
+else
+  echo -e "\033[0;35m ~/.zshrc_kube not found.\033[0m Not sourcing kubernetes extensions"
+fi
 
 # Output the current distro/release version when starting a prompt
 # This would be better if it were just the first time a loginny thing runs...
