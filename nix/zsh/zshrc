@@ -8,7 +8,8 @@ export ZSH=~/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="tobz"
+#ZSH_THEME="tobz"
+ZSH_THEME="muse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -110,6 +111,8 @@ gvim()
   /mnt/c/Program\ Files\ \(x86\)/vim/vim80/gvim.exe "$@" &
 }
 
+#export PATH=$PATH:/usr/local/go/bin
+#export PATH=$PATH:~/go/bin
 
 #source <(kubectl completion zsh)
 if [ -e '~/.zshrc_kube' ] ; then
