@@ -18,3 +18,6 @@ vim/bundle/asyncomplete-lsp.vim
 nix/tmux/tmux/plugins/tpm
 Windows/WindowsPowerShell/Modules/posh-git
 nix/oh-my-zsh/plugins/zsh-autosuggestions
+dev.psm1.ini
+vim/doc/tags
+vim\doc\tags
