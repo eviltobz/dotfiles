@@ -35,7 +35,11 @@ function link {
   SOURCE=~/dotfiles/$1/$2
   DEST=~/.$2
   if [ -e $DEST ]; then
-    echo -e "${YELLOW}.$2 exists. Not linking."
+    if [ -L $DEST ]; then
+      echo -e "${YELLOW}.$2 already linked. Not linking."
+    else
+      echo -e "${RED}.$2 exists and is NOT a link! Not linking."
+    fi
   else
     echo -e "${GREEN}Linking $2 from $SOURCE"
     ln -s $SOURCE $DEST

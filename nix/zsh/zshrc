@@ -8,7 +8,8 @@ export ZSH=~/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="tobz"
+#ZSH_THEME="tobz"
+ZSH_THEME="muse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -59,7 +60,11 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+if [ -e '/lib/rustlib' ] ; then
+  export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+else
+  echo -e "\033[0;35m /lib/rustlib not found.\033[0m Not setting RUST_SRC_PATH"
+fi
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -106,9 +111,15 @@ gvim()
   /mnt/c/Program\ Files\ \(x86\)/vim/vim80/gvim.exe "$@" &
 }
 
+#export PATH=$PATH:/usr/local/go/bin
+#export PATH=$PATH:~/go/bin
 
 #source <(kubectl completion zsh)
-source ~/.zshrc_kube
+if [ -e '~/.zshrc_kube' ] ; then
+  source ~/.zshrc_kube
+else
+  echo -e "\033[0;35m ~/.zshrc_kube not found.\033[0m Not sourcing kubernetes extensions"
+fi
 
 # Output the current distro/release version when starting a prompt
 # This would be better if it were just the first time a loginny thing runs...
