@@ -121,8 +121,11 @@ function DoSetup() {
 #  chocoToTaskbar tailblazer "C:\ProgramData\chocolatey\lib\tailblazer\tools" "TailBlazer.exe"
 #  chocoInstall autohotkey
 
-  Remove-Item "C:\Program Files\ConEmu\ConEmu.xml" 
-  linkFile Windows\ConEmu.xml "C:\Program Files\ConEmu\ConEmu.xml" 
+# I _was_ linking the conemu config here, so I could keep it under source control. But now the wanktard won't use it
+# if it's a simlink rather than a legit file. Tosser!
+#Remove-Item "C:\Program Files\ConEmu\ConEmu.xml" 
+#linkFile Windows\ConEmu\ConEmu.xml "C:\Program Files\ConEmu\ConEmu.xml" 
+  gitGet "ConEmu Dracula Theme" $dotfiles\Windows\ConEmu\Dracula\ https://github.com/dracula/conemu.git
 
 # Common settings
   linkFolder $dotfiles $env:userprofile\dotfiles

@@ -1,3 +1,10 @@
+if([Environment]::CommandLine.endsWith(".ps1")) {
+    Write-Host "Executing script without profile: " -NoNewLine 
+    Write-Host "$([Environment]::CommandLine)" -ForegroundColor DarkGray
+    Exit
+}
+
+
 # Utility Methods
 function PausePrompt()
 {
@@ -34,7 +41,7 @@ $PRIVATE:UtilsPath = "C:\Utils"
 $DotfilesPath = "$home\dotfiles"
 $PsScripts = "$DotfilesPath\windows\PsScripts"
 #$AhkScripts = "$DotfilesPath\windows\AutoHotKeyScripts"
-$WorkScripts = "$DotfilesPath\Work\15below\PowershellScripts"
+$WorkScripts = "$DotfilesPath\Work\Applied\PowershellScripts"
 	
 function EditProfile() { vi $profile }
 function EditVimrc() { vi $home\_vimrc }
@@ -48,8 +55,9 @@ admin
 
 # Common 3rd Party Apps
 new-alias vi vim -Force
-& "$PsScripts\SetupVisualStudio.ps1"
-. 'C:\Users\toby.carter\Documents\WindowsPowerShell\Modules\posh-git\profile.example.ps1' # Load posh-git example profile
+write-host "Skipping VisualStudio setup" -fc Yellow
+#& "$PsScripts\SetupVisualStudio.ps1"
+. 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\profile.example.ps1' choco
 $env:GIT_SSH = "C:\Program Files (x86)\GitExtensions\PuTTY\plink.exe"
 #AutoHotKey "$AhkScripts\WinWarden\WinWarden.ahk"
 
@@ -68,13 +76,22 @@ $env:Path += ";.\;$PsScripts;$WorkScripts"
 #. "$WorkScripts\SetWorkingDir.ps1"
 . "$WorkScripts\WorkProfile.ps1"
 $env:Path += ";D:\git\eviltobz\ObjKilla\bin\Debug\"
+$env:Path += ";C:\Program Files\Git\bin"
+# this should go in a work place...
+#$env:Path += ";C:\Users\tcarter\.cargo\bin"
 
 
 
 # Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
-}
+#$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+#if (Test-Path($ChocolateyProfile)) {
+#  Import-Module "$ChocolateyProfile"
+#}
+Import-Module "c:\programdata\Chocolatey\helpers\chocolateyProfile.psm1"
 
 gitas
+
+Set-PSReadlineOption -BellStyle None
+
+# Set TLS - the default settings for what TLS is supported don't work with cmdlets that try to update things from MS's own sites. WTF?!?!
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12

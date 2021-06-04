@@ -23,6 +23,7 @@ function chocoInstall($name) {
 
 
 function DoPrereqs() {
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
   if(-not (Test-Path "C:\ProgramData\chocolatey\bin")) {
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
   }

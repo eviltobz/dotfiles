@@ -5,19 +5,19 @@ if ($args[0] -eq $null) {
 }
 
 $eviltobz = "eviltobz","evil","tobz"
-$15b = "15b","toby.carter"
+$applied = "applied","tcarter"
 if($user -eq "") {
   Write-Host "Current git config" -f Green  
 } else {
-    if( -not $eviltobz.contains($user) -and -not $15b.contains($user)) {
+    if( -not $eviltobz.contains($user) -and -not $applied.contains($user)) {
     Write-Host "User '" -nonewline; Write-Host $user -f Red -nonewline; Write-Host "' is not supported. Please provide a valid user (" -nonewline
-      Write-Host "$eviltobz / $15b" -f Green -nonewline; Write-Host ")"
+      Write-Host "$eviltobz / $applied" -f Green -nonewline; Write-Host ")"
   } else {
     if($eviltobz.contains($user)) {
       git config --global user.email eviltobz@hotmail.com
       git config --global user.name eviltobz
     } else {
-      git config --global user.email toby.carter@15below.com
+      git config --global user.email tcarter@appliedsystems.com
       git config --global user.name "toby carter"
     }
     Write-Host "...note - i may still need to do something about setting up git keys..." -foregroundcolor yellow

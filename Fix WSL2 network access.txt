@@ -1,0 +1,14 @@
+https://colhountech.com/2021/04/01/wsl2-ubuntu-ping-hostname-temporary-failure-in-name-resolution/
+
+
+Create the file /etc/wsl.conf with the contents:
+[network]
+generateResolvConf = false
+
+Remove or rename the existing /ect/resolv.conf file or link
+
+Create a new file /etc/resolv.conf with the contents:
+nameserver 172.16.88.5
+nameserver 172.16.88.6
+
+Note: Check the DNS addresses to use match what is configured in the AnyConnect network adapter's properties page
