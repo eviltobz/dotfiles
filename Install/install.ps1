@@ -120,6 +120,7 @@ function DoSetup() {
 #  chocoInstall puretext
 #  chocoToTaskbar tailblazer "C:\ProgramData\chocolatey\lib\tailblazer\tools" "TailBlazer.exe"
 #  chocoInstall autohotkey
+  chocoInstall bat
 
 # I _was_ linking the conemu config here, so I could keep it under source control. But now the wanktard won't use it
 # if it's a simlink rather than a legit file. Tosser!

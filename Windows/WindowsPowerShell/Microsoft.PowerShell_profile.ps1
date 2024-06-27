@@ -26,10 +26,22 @@ function isAdmin {
 } 
 
 function admin {
+  Write-Host
   if(isAdmin) {
     Write-Host "Running as " -nonewline; Write-Host "admin." -f Green
   } else {
     Write-Host "Running as " -nonewline; Write-Host "standard user." -f Red
+    Write-Host "Reopen as admin? y/n"
+    $key = $Host.UI.RawUI.ReadKey()
+    if($key.Character -eq 'y') {
+      gsudo C:\Users\toby.carter\AppData\Local\Microsoft\WindowsApps\wt.exe
+    } elseif($key.Character -eq 'n') {
+    } else {
+      Write-Host ""
+      Write-Host "Unexpected input '" -NoNewLine; Write-Host $key.Character -f Yellow -NoNewLine; Write-Host "'"
+      Write-Host "Remaining as standard user. To open an admin window run the command:"
+      Write-Host "gsudo C:\Users\toby.carter\AppData\Local\Microsoft\WindowsApps\wt.exe" -f Yellow
+    }
   }
 }
 
@@ -41,21 +53,34 @@ $PRIVATE:UtilsPath = "C:\Utils"
 $DotfilesPath = "$home\dotfiles"
 $PsScripts = "$DotfilesPath\windows\PsScripts"
 #$AhkScripts = "$DotfilesPath\windows\AutoHotKeyScripts"
-$WorkScripts = "$DotfilesPath\Work\Applied\PowershellScripts"
+$WorkScripts = "$DotfilesPath\Work\Deltatre\PowershellScripts"
 	
 function EditProfile() { vi $profile }
 function EditVimrc() { vi $home\_vimrc }
 function EditHosts() { vi "C:\Windows\System32\Drivers\etc\hosts" }
-function ShowScripts() { cd "$PsScripts"; ls }
+function ShowScripts() {echo "Use CdScripts now for consistency, innit."}
+function CdScripts() { cd "$PsScripts"}
 function clls() { cls; ls} 
-function cdls($path) { cd $path; ls} 
-function cddot() { cd $DotfilesPath; ls} 
+function cdls($path) { set-location $path; ls }
+function cddot() { cd $DotfilesPath}
+function cd..() { cdls .. }
 echo "Use EditProfile EditHosts & EditVimrc to edit configuration"
-admin
 
 # Common 3rd Party Apps
 new-alias vi vim -Force
-write-host "Skipping VisualStudio setup" -fc Yellow
+del alias:cat
+new-alias cat bat -Force
+
+
+# My aliases
+del alias:cd
+new-alias cd cdls -Force
+new-alias prj C:\git\eviltobz\Vvec\Vvec.Prj\prj.ps1
+
+
+
+
+write-host "Skipping VisualStudio setup" -f Yellow
 #& "$PsScripts\SetupVisualStudio.ps1"
 . 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\profile.example.ps1' choco
 $env:GIT_SSH = "C:\Program Files (x86)\GitExtensions\PuTTY\plink.exe"
@@ -89,9 +114,21 @@ $env:Path += ";C:\Program Files\Git\bin"
 #}
 Import-Module "c:\programdata\Chocolatey\helpers\chocolateyProfile.psm1"
 
-gitas
+Write-Host
+gitas current
 
 Set-PSReadlineOption -BellStyle None
 
 # Set TLS - the default settings for what TLS is supported don't work with cmdlets that try to update things from MS's own sites. WTF?!?!
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+
+### wrap poshgit prompt with my own code - SHOULD BE COMPANY-SPECIFIC
+# $poshGitPrompt = (Get-Command Prompt).ScriptBlock
+# function prompt {
+# $x = (& $poshGitPrompt)
+# Write-Prompt "`nCHECK IF CSPROJ IS x-PRE-x>" -f RED
+# " "
+# }
+
+admin

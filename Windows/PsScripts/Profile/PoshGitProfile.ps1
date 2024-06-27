@@ -1,6 +1,6 @@
 Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 
-Import-Module posh-git
+#Import-Module posh-git
 
 # Set up a simple prompt, adding the git prompt parts inside git repos
 function prompt {

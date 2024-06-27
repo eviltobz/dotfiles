@@ -6,21 +6,26 @@ function touch($filename) {
 function rm() {
   if($args[0] -eq "-rf") {
 #write-host "unixey override rm -rf $args[1]"
-    Remove-Item -recurse -force $args[1]
+    iex "Remove-Item -recurse -force '$($args[1])'"
   } else {
 #write-host "unixey override passthrough to Remove-Item $args"
-    iex "Remove-Item $args"
+    iex "Remove-Item '$args'"
   }
 }
 
 function ls() {
-  if($args[0] -eq "-lah") {
+  Get-ChildItem -force $args[0]
+# 
+# When do I _EVER_ not want -lah, really?
+#
+#if($args[0] -eq "-lah") {
 #write-host "unixey override ls -lah $args[1]"
-    Get-ChildItem -force "$args[1]"
-  } else {
+#Get-ChildItem -force "$args[1]"
+#Get-ChildItem -force $args[1]
+#} else {
 #write-host "unixey override passthrough to Get-ChildItem $args"
-    iex "Get-ChildItem '$args'"
-  }
+#iex "Get-ChildItem '$args'"
+#}
 }
 
 function l() {

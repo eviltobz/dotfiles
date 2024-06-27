@@ -4,23 +4,41 @@ if ($args[0] -eq $null) {
   $user = $args[0].ToLower();
 }
 
+if ($user -eq "current") {
+  $verbose = $false
+  $user = ""
+} else {
+  $verbose = $true
+}
+
+
 $eviltobz = "eviltobz","evil","tobz"
-$applied = "applied","tcarter"
+$deltatre = "delta","deltatre" 
+
+if($verbose)
+{
+    Write-Host "...Note - I still need to do something about setting up git keys..." -foregroundcolor yellow -backgroundcolor red
+}
+
 if($user -eq "") {
+  if($verbose)
+  {
+    Write-Host "Call with 'evil' or 'delta' to change user" 
+    Write-Host 
+  }
   Write-Host "Current git config" -f Green  
 } else {
-    if( -not $eviltobz.contains($user) -and -not $applied.contains($user)) {
+    if( -not $eviltobz.contains($user) -and -not $deltatre.contains($user)) {
     Write-Host "User '" -nonewline; Write-Host $user -f Red -nonewline; Write-Host "' is not supported. Please provide a valid user (" -nonewline
-      Write-Host "$eviltobz / $applied" -f Green -nonewline; Write-Host ")"
+      Write-Host "$eviltobz / $deltatre" -f Green -nonewline; Write-Host ")"
   } else {
     if($eviltobz.contains($user)) {
       git config --global user.email eviltobz@hotmail.com
       git config --global user.name eviltobz
     } else {
-      git config --global user.email tcarter@appliedsystems.com
+      git config --global user.email toby.carter@deltatre.com
       git config --global user.name "toby carter"
     }
-    Write-Host "...note - i may still need to do something about setting up git keys..." -foregroundcolor yellow
   }
 }
 

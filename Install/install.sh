@@ -123,6 +123,12 @@ gitGet tpm  nix/tmux/tmux/plugins/tpm https://github.com/tmux-plugins/tpm
 
 link nix oh-my-zsh
 
+echo "Trying to apt install stuff. Wish me luck..."
+# cat replacement
+sudo apt install bat
+# ls replacement
+sudo apt install exa
+
 # Manual install steps
 # vim
 #  :helptags ~/.vim/bundle/nerdtree/doc/

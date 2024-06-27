@@ -16,7 +16,7 @@ vim/bundle/vim-lsp
 vim/bundle/asyncomplete.vim
 vim/bundle/asyncomplete-lsp.vim
 nix/tmux/tmux/plugins/tpm
-Windows/WindowsPowerShell/Modules/posh-git
+Windows/WindowsPowerShell/Modules
 nix/oh-my-zsh/plugins/zsh-autosuggestions
 dev.psm1.ini
 vim/doc/tags

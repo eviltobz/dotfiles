@@ -1,6 +1,5 @@
 " Settings for proper vim/neovim
 
-
 " Navigation stuff
 " turbo cursor navigation
 nnoremap <silent> <Left> @='5h'<CR>|xnoremap <silent> <Left> @='5h'<CR> "|onoremap <Left> 5h|
@@ -59,34 +58,6 @@ set undofile
 " File type specific tweaks - may want to pull out to individual files in
 " ftplugin dir
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
-
-" Set up any plugin bits n bobbins
-execute pathogen#infect()
-execute pathogen#helptags()
-
-" Syntastic 
-" Statusline additions
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" Variables
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" Enable checkers
-let g:syntastic_sql_checkers = ['sqlint']
-let g:syntastic_vim_checkers = ['vimlint', 'vint']
-let g:syntastic_xml_checkers = ['plutil', 'xmllint']
-let g:syntastic_xslt_checkers = ['xmllint']
-
-let g:idris_indent_if = 3
-let g:idris_indent_do = 3
-let g:idris_indent_let = 4
-let g:idris_indent_case = 5
-let g:idris_indent_where = 6
-let g:idris_indent_rewrite = 8
-
 
 " command line movement keys
 "cnoremap <C-a>  <Home>
