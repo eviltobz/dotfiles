@@ -1,0 +1,26 @@
+name: 'Deploy infra'
+description: 'Deploys infra using Terraform'
+inputs:
+    env:
+        description: DFB environment
+        required: true
+    region:
+        description: DFB region
+        required: true
+
+runs:
+    using: "composite"
+    steps:
+        - name: Deploy
+          shell: bash
+          run: >
+            docker run --rm
+            --volume ${{ github.workspace }}/artifacts:/dfb
+            --workdir /app
+            -e AWS_ACCESS_KEY_ID=${{ env.AWS_ACCESS_KEY_ID }}
+            -e AWS_SECRET_ACCESS_KEY='${{ env.AWS_SECRET_ACCESS_KEY }}'
+            -e AWS_SESSION_TOKEN='${{ env.AWS_SESSION_TOKEN }}'
+            dfb-orders-config/infra:${{ env.RELEASE_VERSION }} /dfb/infra/deploy.ps1
+            -environment ${{ inputs.env }}
+            -region ${{ inputs.region }}
+            -apply

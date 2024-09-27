@@ -1,0 +1,36 @@
+name: Validate configs
+on:
+  # Triggers the workflow on pull request events for all branches
+  pull_request:
+
+  # Triggers the workflow on push to the main branch
+  push:
+    branches: [main]
+
+env:
+  PROJECT_NAME: Dazn.Orders.Config
+  DOCKER_IMAGE: ${{ github.event.repository.name }}/config-sync:${{ github.sha }}
+
+jobs:
+  run-verify-script:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Ensure scripts are executable
+        run: find ./scripts -type f \( -name "*.ps1" -or -name "*.sh" \) -print0 | xargs -0 chmod 755
+
+      - name: Build Docker
+        run: docker build -t ${{ env.DOCKER_IMAGE }} -f ./config-sync/Dockerfile .
+
+      - name: Run Docker - Validate Configs
+        run: >
+            docker run --rm
+            --volume ${{ github.workspace }}:/dfb
+            --workdir /
+            ${{ env.DOCKER_IMAGE }} /dfb/config-sync/sync-configs.ps1 -nosync
+      - name: Success
+        run: echo "### Success! :rocket:" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,117 @@
+name: Mismatch check
+on:
+  # Triggers the workflow every hour
+  schedule:
+    - cron: '0 */1 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+        env:
+            description: DFB environment
+            required: false
+            type: choice
+            default: ALL
+            options:
+                - ALL
+                - PROD
+                - STAG
+                - TEST
+                - DEV
+        region:
+            description: DFB region
+            required: false
+            type: choice
+            default: ALL
+            options:
+                - ALL
+                - EU-CENTRAL-1
+                - AP-NORTHEAST-1
+
+env:
+  PROJECT_NAME: Dazn.Orders.Config
+  DOCKER_IMAGE: dfb-orders-config/config-check:${{ github.sha }}
+
+jobs:
+    check-for-mismatches:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Ensure scripts are executable
+              run: find ./scripts -type f \( -name "*.ps1" -or -name "*.sh" \) -print0 | xargs -0 chmod 755
+
+            - name: Build Docker
+              run: docker build -t ${{ env.DOCKER_IMAGE }} -f ./config-check/Dockerfile .
+
+            # Cannot go into ./.github/actions/compare because of bug:
+            # https://github.com/actions/runner/issues/789#issuecomment-1081879113
+            - name: DEV - Configure AWS credentials
+              if: ${{ !github.event.inputs.env || github.event.inputs.env == 'DEV' || github.event.inputs.env == 'ALL' }}
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: eu-central-1
+                role-to-assume: arn:aws:iam::714306903482:role/automation-gha-ci
+
+            - name: DEV - Compare configs
+              if: ${{ !github.event.inputs.env || github.event.inputs.env == 'DEV' || github.event.inputs.env == 'ALL' }}
+              uses: ./.github/actions/compare
+              with:
+                env: DEV
+                region: ${{ github.event.inputs.region  || 'ALL' }}
+
+            - name: TEST - Configure AWS credentials
+              if: ${{ !github.event.inputs.env || github.event.inputs.env == 'TEST' || github.event.inputs.env == 'ALL' }}
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: eu-central-1
+                role-to-assume: arn:aws:iam::931209822253:role/automation-gha-ci
+
+            - name: TEST - Compare configs
+              if: ${{ !github.event.inputs.env || github.event.inputs.env == 'TEST' || github.event.inputs.env == 'ALL' }}
+              uses: ./.github/actions/compare
+              with:
+                env: TEST
+                region: ${{ github.event.inputs.region  || 'ALL' }}
+
+            - name: STAG - Configure AWS credentials
+              if: ${{ !github.event.inputs.env || github.event.inputs.env == 'STAG' || github.event.inputs.env == 'ALL' }}
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: eu-central-1
+                role-to-assume: arn:aws:iam::175901229741:role/automation-gha-ci
+
+            - name: STAG - Compare configs
+              if: ${{ !github.event.inputs.env || github.event.inputs.env == 'STAG' || github.event.inputs.env == 'ALL' }}
+              uses: ./.github/actions/compare
+              with:
+                env: STAG
+                region: ${{ github.event.inputs.region  || 'ALL' }}
+
+            - name: PROD - Configure AWS credentials
+              if: ${{ !github.event.inputs.env || github.event.inputs.env == 'PROD' || github.event.inputs.env == 'ALL' }}
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: eu-central-1
+                role-to-assume: arn:aws:iam::556548779709:role/automation-gha-ci
+
+            - name: PROD - Compare configs
+              if: ${{ !github.event.inputs.env || github.event.inputs.env == 'PROD' || github.event.inputs.env == 'ALL' }}
+              uses: ./.github/actions/compare
+              with:
+                env: PROD
+                region: ${{ github.event.inputs.region  || 'ALL' }}
+
+            - name: Success
+              run: echo "### Success! :rocket:" >> $GITHUB_STEP_SUMMARY

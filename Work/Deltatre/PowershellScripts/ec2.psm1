@@ -1,6 +1,7 @@
 function OpenTunnel($target, $remotePort, $localPort, $host) {
-  aws sso login --profile AWSAdministratorAccess-309066805775
-  echo "logged in"
+  Write-Host "SKIP LOGIN" -f RED
+#aws sso login --profile AWSAdministratorAccess-309066805775
+#echo "logged in"
 
   $documentName = "AWS-StartPortForwardingSession"
 #$parameters = ""
@@ -19,12 +20,18 @@ function OpenTunnel($target, $remotePort, $localPort, $host) {
   iex $connectionCommand
 }
 
+function Login() {
+  aws sso login --profile AWSAdministratorAccess-309066805775
+  echo "logged in"
+}
+
 function ConnectTo($target, $localPort) {
 #$ssoCommand = aws sso login --profile AWSAdministratorAccess-309066805775
 #iex $ssoCommand
-  aws sso login --profile AWSAdministratorAccess-309066805775
+  Write-Host "SKIP LOGIN" -f RED
+#aws sso login --profile AWSAdministratorAccess-309066805775
 
-  echo "logged in"
+
 
   $rdpCommand = "mstsc /v:localhost:$localPort"
   iex $rdpCommand
@@ -128,7 +135,7 @@ function GetCommand($argCommand) {
 
   $expected = $argCommand.ToLower()
   foreach($command in $allCommands) {
-#write-host "C:$command, E:$expected, $($command.GetType().Name)"
+#write-host "DEBUG - C:$command, E:$expected, $($command.GetType().Name)"
     if($command -eq $expected) {
       return $command[1]
     }
@@ -162,7 +169,8 @@ function displayUsage() {
   Write-Host "Usage: " -NoNewline -ForegroundColor Cyan 
   Write-Host " ec2 [instance]"
 
-DisplaySection "Instances" $dev
+DisplaySection "General" $general
+DisplaySection "Dev" $dev
 DisplaySection "Staging" $stag
 DisplayWarningSection "Production" $prod
 }
@@ -180,6 +188,10 @@ function ec2 () {
   }
 }
 
+$general = @(
+  @("sso", "Login", "SSO Login"),
+  @("", "", "") # Have a blank at the end because powershell arrays are mental
+    )
 
 $dev = @(
   @("core", "ConnectToDevCore", "Connect to dev-core"),
@@ -207,6 +219,6 @@ $prod = @(
 # cli arg, help title, tunnel/rdp, local port
 
 
-$allCommands = $dev + $stag + $prod
+$allCommands = $general + $dev + $stag + $prod
 
 Export-ModuleMember -Function ec2

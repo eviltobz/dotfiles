@@ -1,0 +1,26 @@
+name: 'Publish configs'
+description: 'Publish configs... CHECK EXACT WORDING BEFORE COMMITTING!!!!'
+inputs:
+    env:
+        description: DFB environment
+        required: true
+    region:
+        description: DFB region
+        required: true
+runs:
+    using: "composite"
+    steps:
+        - name: Check Configs
+          shell: bash
+          run: >
+            docker run --rm
+            --volume ${{ github.workspace }}:/dfb
+            --workdir /
+            -e AWS_ACCESS_KEY_ID=${{ env.AWS_ACCESS_KEY_ID }}
+            -e AWS_SECRET_ACCESS_KEY='${{ env.AWS_SECRET_ACCESS_KEY }}'
+            -e AWS_SESSION_TOKEN='${{ env.AWS_SESSION_TOKEN }}'
+            ${{ env.DOCKER_IMAGE }}
+            /dfb/config-sync/sync-configs.ps1
+            -environment ${{ inputs.env }}
+            -region ${{ inputs.region }}
+            -apply

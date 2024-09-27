@@ -1,0 +1,40 @@
+name: Infra - Release Version
+
+on:
+  workflow_dispatch:
+
+jobs:
+    create-infra-release:
+        runs-on: ubuntu-latest
+        concurrency:
+            group: Release
+            cancel-in-progress: false
+        timeout-minutes: 10
+        steps:
+            - name: Code Checkout
+              uses: actions/checkout@v2
+
+            - name: Assign release version from version.properties to Env variable
+              run: cat version.properties >> $GITHUB_ENV
+
+            - name: setup git config
+              run: |
+                  git config user.name "Deltatre Bots"
+                  git config user.email "D4B.BE@deltatre.com"
+            - name: Tag new version
+              run: git tag -a v${{ env.VERSION }} -m "Version ${{ env.VERSION }}"
+
+            - name: Push to branch
+              run: git push origin v${{ env.VERSION }}
+
+            - uses: actions/upload-artifact@v3
+              with:
+                  name: Image-v${{ env.VERSION }}
+                  path: |
+                    settings.ps1*
+                    scripts/*
+                    infra/*
+                    !infra/.terraform/*
+                    version.properties
+            - name: Success
+              run: echo "### Success! Release version v${{ env.VERSION }} created!   :rocket:" >> $GITHUB_STEP_SUMMARY

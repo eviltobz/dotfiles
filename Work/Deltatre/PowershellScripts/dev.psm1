@@ -46,7 +46,8 @@ function CdAxis() {
 
 function GitExtensionsHere() {
   Write-Host "Starting Git Extensions in: " -NoNewLine ; Write-Host "$(pwd)" -f Yellow
-  gitex browse .
+  & "C:\Program Files\GitExtensions\GitExtensions.exe" browse .
+# gitex browse .
 }
 
 function CdRepoRoot() {

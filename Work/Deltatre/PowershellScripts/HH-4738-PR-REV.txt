@@ -1,0 +1,20 @@
+# Description of change
+
+Unpinning apk version in dockerfiles. Alpine only have the most recent version in their system, so whilst we can specify a version, as soon as a new one is added, the old one will stop being available and the docker build will break. 
+
+Jira ticket: https://livesport.atlassian.net/browse/HH-4738
+
+Peer reviewer: none
+
+## Change checklist
+
+Place an `x` in all boxes that apply:
+
+- [X] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.

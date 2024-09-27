@@ -1,0 +1,53 @@
+name: Continuous Integration
+on:
+  # Triggers the workflow on pull request events but only for the main branch
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [main]
+
+env:
+  DOCKER_IMAGE: ${{ github.event.repository.name }}:${{ github.sha }}
+
+jobs:
+  run-verify-script:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        env:
+          - PROD
+        region:
+          - eu-central-1
+          - ap-northeast-1
+    concurrency:
+      group: ${{ github.event.repository.name }}_cicd_${{ matrix.env }}
+    timeout-minutes: 10
+    steps:
+
+      - name: Set variables - PROD
+        if: matrix.env == 'PROD'
+        run: |
+          echo "AWS_ACCOUNT=556548779709" >> $GITHUB_ENV
+          echo "NR_API_KEY=${{ secrets.GLOBAL_NEWRELIC_COMPREM_PROD_PERSONAL_API_KEY }}" >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: docker build -t ${{ env.DOCKER_IMAGE }} -f ./scripts/Dockerfile .
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ matrix.region }}
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/automation-gha-ci
+
+      - name: Validate/Deploy changes
+        run: >
+          docker run --rm
+          -e NEW_RELIC_API_KEY=${{ env.NR_API_KEY }}
+          -e AWS_ACCESS_KEY_ID=${{ env.AWS_ACCESS_KEY_ID }}
+          -e AWS_SECRET_ACCESS_KEY=${{ env.AWS_SECRET_ACCESS_KEY }}
+          -e AWS_SESSION_TOKEN=${{ env.AWS_SESSION_TOKEN }}
+          ${{ env.DOCKER_IMAGE }} ${{ matrix.env }} ${{ matrix.region }} dry

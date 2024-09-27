@@ -39,6 +39,8 @@ function wdck {
 #cd c:\git
 if ($initialPath -eq "C:\Users\toby.carter") {
   cd c:\git\dyn
+  Write-Host "Current power profile:"
+  pwr -view
 #Write-Host "-----------------------------------" -f RED
 #Write-Host "...cd into the new project dir foo!" -f RED
 #Write-Host "-----------------------------------" -f RED

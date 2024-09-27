@@ -1,0 +1,22 @@
+# Description of change
+
+Pinning dependencies in dockerfiles
+
+Jira ticket: https://livesport.atlassian.net/browse/HH-4738
+
+Peer reviewer: none
+
+## Change checklist
+
+Place an `x` in all boxes that apply:
+
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+
+None of the checklist items quite fit the work done for this PR.

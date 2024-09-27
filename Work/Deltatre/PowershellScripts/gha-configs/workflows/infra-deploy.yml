@@ -1,0 +1,88 @@
+name: Infra - Deploy Version
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      env:
+        description: DFB environment
+        required: true
+        type: choice
+        default: DEV
+        options:
+          - DEV
+          - TEST
+          - STAG
+          - PROD
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: Deploy_${{ github.event.inputs.env }}
+      cancel-in-progress: false
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - name: Code Checkout
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+            workflow: infra-release.yml
+            name: Image-${{ env.RELEASE_VERSION }}
+            path: artifacts
+            search_artifacts: true
+
+      - name: Ensure scripts are executable
+        run: find ./artifacts/* -type f -name '*.ps1' -print0 | xargs -0 chmod 755
+
+      - name: Build Docker
+        run: docker build -t dfb-orders-config/infra:${{ env.RELEASE_VERSION }} -f ./artifacts/infra/Dockerfile .
+
+      - name: Set AWS_ACCOUNT - DEV
+        if: ${{ github.event.inputs.env == 'DEV' }}
+        run: |
+            echo "AWS_ACCOUNT=714306903482" >> $GITHUB_ENV
+      - name: Set AWS_ACCOUNT - TEST
+        if: ${{ github.event.inputs.env == 'TEST' }}
+        run: |
+            echo "AWS_ACCOUNT=931209822253" >> $GITHUB_ENV
+      - name: Set AWS_ACCOUNT - STAG
+        if: ${{ github.event.inputs.env == 'STAG' }}
+        run: |
+            echo "AWS_ACCOUNT=175901229741" >> $GITHUB_ENV
+      - name: Set AWS_ACCOUNT - PROD
+        if: ${{ github.event.inputs.env == 'PROD' }}
+        run: |
+            echo "AWS_ACCOUNT=556548779709" >> $GITHUB_ENV
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: eu-central-1
+            role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/automation-gha-ci
+
+      - name: Deploy infra in eu-central-1
+        uses: ./.github/actions/deploy
+        with:
+            env: ${{ github.event.inputs.env  }}
+            region: eu-central-1
+
+      - name: Deploy infra in ap-northeast-1
+        uses: ./.github/actions/deploy
+        with:
+            env: ${{ github.event.inputs.env  }}
+            region: ap-northeast-1
+
+      - name: Deploy infra in eu-west-1
+        if: ${{ github.event.inputs.env == 'DEV' }}
+        uses: ./.github/actions/deploy
+        with:
+            env: ${{ github.event.inputs.env  }}
+            region: eu-west-1
+
+      - name: Success
+        run: echo "### ${{ env.RELEASE_VERSION }} successful deployed on _${{ github.event.inputs.env }}_ :rocket:" >> $GITHUB_STEP_SUMMARY
