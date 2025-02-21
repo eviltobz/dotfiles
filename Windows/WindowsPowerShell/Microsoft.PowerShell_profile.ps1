@@ -53,10 +53,11 @@ $PRIVATE:UtilsPath = "C:\Utils"
 $DotfilesPath = "$home\dotfiles"
 $PsScripts = "$DotfilesPath\windows\PsScripts"
 #$AhkScripts = "$DotfilesPath\windows\AutoHotKeyScripts"
-$WorkScripts = "$DotfilesPath\Work\Deltatre\PowershellScripts"
+$WorkScripts = "$DotfilesPath\Work\Accurx\PowershellScripts"
 	
 function EditProfile() { vi $profile }
 function EditVimrc() { vi $home\_vimrc }
+function EditGitIgnore() { vi $DotfilesPath\GlobalGit\.gitignore }
 function EditHosts() { vi "C:\Windows\System32\Drivers\etc\hosts" }
 function ShowScripts() {echo "Use CdScripts now for consistency, innit."}
 function CdScripts() { cd "$PsScripts"}
@@ -82,7 +83,8 @@ new-alias prj C:\git\eviltobz\Vvec\Vvec.Prj\prj.ps1
 
 write-host "Skipping VisualStudio setup" -f Yellow
 #& "$PsScripts\SetupVisualStudio.ps1"
-. 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\profile.example.ps1' choco
+# . 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\profile.example.ps1' choco
+Import-Module posh-git
 $env:GIT_SSH = "C:\Program Files (x86)\GitExtensions\PuTTY\plink.exe"
 #AutoHotKey "$AhkScripts\WinWarden\WinWarden.ahk"
 
@@ -131,4 +133,4 @@ Set-PSReadlineOption -BellStyle None
 # " "
 # }
 
-admin
+# admin
